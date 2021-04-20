@@ -242,7 +242,7 @@ class PhysicsMenu extends React.Component {
 
         while (this.state.count < config.CIRCLE_COUNT) {
             this.circles.push(new Circle([mathUtils.randomInt(this.width), mathUtils.randomInt(this.height)],
-                                          Math.max(config.RADIUS_DEFAULT, mathUtils.randomInt(config.RADIUS_DEFAULT*2))));
+                                          Math.max(config.RADIUS_DEFAULT/2, mathUtils.randomInt(config.RADIUS_DEFAULT*2))));
 
             this.setState({ count: this.state.count+1 });
         }
@@ -325,13 +325,16 @@ class PhysicsMenu extends React.Component {
             'left': '0px'
         };
 
+        const text = backgroundText[mathUtils.randomInt(backgroundText.length)];
+
         return (
             <div style={ pageStyle }
                  onMouseMove={ this.mouseMove.bind(this) }
                  onMouseLeave={ this.mouseLeave.bind(this) }>
-                <div style={ textStyle }>{ backgroundText }</div>
+                <div style={ textStyle }>{ text }</div>
                 <MenuText text="github" style={ contentStyle } url="https://www.github.com/JTan2231" number="1"/>
                 <MenuText text="linkedin" style={ contentStyle } url="https://www.linkedin.com/in/joseph-tan-478aa5186/" number="2"/>
+                <MenuText text="website source" style={ contentStyle } url="https://github.com/JTan2231/JTan2231.github.io/tree/dev" number="3"/>
                 <canvas style={ leftBackgroundStyle } onMouseLeave={ this.mouseLeaveLeftBackground.bind(this) }
                         ref='leftBackgroundCanvas' width={ this.leftOffset } height={ this.height }/>
                 <canvas style={ backgroundStyle } ref='backgroundCanvas' width={ this.canvasWidth } height={ this.height }/>
