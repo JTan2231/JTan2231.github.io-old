@@ -86,6 +86,10 @@ class PhysicsMenu extends React.Component {
         };
         this.circles = [];
         this.collisions = [];
+
+        this.backgroundCanvas = React.createRef();
+        this.leftBackgroundCanvas = React.createRef();
+        this.circleCanvas = React.createRef();
     }
 
     componentDidMount() {
@@ -204,13 +208,6 @@ class PhysicsMenu extends React.Component {
         this.mouse.y = -1000;
     }
 
-    mouseLeaveLeftBackground(e) {
-        const canvas = this.refs.leftBackgroundCanvas;
-        const context = canvas.getContext('2d');
-        context.fillStyle = 'black';
-        context.fillRect(0, 0, this.leftOffset, this.height);
-    }
-
     drawCircle(context, circle, color='black') {
         context.beginPath();
         context.arc(circle.position.x, circle.position.y, circle.radius, 0, 2*Math.PI, false);
@@ -222,20 +219,22 @@ class PhysicsMenu extends React.Component {
 
     tick() {
         if (!this.state.backgroundDrawn) {
-            var background = this.refs.backgroundCanvas;
+            console.log("CHECK");
+
+            var background = this.backgroundCanvas.current;
             var ctx = background.getContext('2d');
             ctx.fillStyle = config.BACKGROUND_COLOR;
             ctx.fillRect(0, 0, this.width*config.TEXT_RATIO, this.height);
 
-            background = this.refs.leftBackgroundCanvas;
+            background = this.leftBackgroundCanvas.current;
             ctx = background.getContext('2d');
             ctx.fillStyle = 'black';
-            ctx.fillRect(0, 0, this.width*(1-config.TEXT_RATIO), this.height);
+            ctx.fillRect(0, 0, this.leftOffset, this.height);
 
             this.setState({ backgroundDrawn: true });
         }
 
-        const canvas = this.refs.circleCanvas;
+        const canvas = this.circleCanvas.current;
         const context = canvas.getContext('2d');
 
         context.clearRect(0, 0, this.width, this.height);
@@ -251,22 +250,17 @@ class PhysicsMenu extends React.Component {
         for (var i = 0; i < this.circles.length; i++)
             this.drawCircle(context, this.circles[i]);
 
-        const can = this.refs.leftBackgroundCanvas;
+        const can = this.leftBackgroundCanvas.current;
         const c = can.getContext('2d');
 
         context.save();
-        if (this.mouse.x > this.width*(1-config.TEXT_RATIO) && this.mouse.y > 0) {
-            c.fillStyle = 'black';
-            c.fillRect(0, 0, this.width*(1-config.TEXT_RATIO), this.height);
-            const mouseCircle = new Circle([this.mouse.x-this.leftOffset, this.mouse.y], config.RADIUS_DEFAULT/2);
-            this.drawCircle(context, mouseCircle, 'black');
-        }
-        else if (this.mouse.x > 0) {
-            c.fillStyle = 'black';
-            c.fillRect(0, 0, this.width*(1-config.TEXT_RATIO), this.height);
-            const mouseCircle = new Circle([this.mouse.x, this.mouse.y], config.RADIUS_DEFAULT/40);
-            this.drawCircle(c, mouseCircle, 'white');
-        }
+
+        c.fillStyle = 'black';
+        c.fillRect(0, 0, this.leftOffset, this.height);
+        const blackCircle = new Circle([this.mouse.x-this.leftOffset, this.mouse.y], config.RADIUS_DEFAULT/2);
+        this.drawCircle(context, blackCircle, 'black');
+        const whiteCircle = new Circle([this.mouse.x, this.mouse.y], config.RADIUS_DEFAULT/40);
+        this.drawCircle(c, whiteCircle, 'white');
 
         context.restore();
 
@@ -319,7 +313,7 @@ class PhysicsMenu extends React.Component {
         };
 
         const leftBackgroundStyle = {
-            'zIndex': 0,
+            'zIndex': 3,
             'position': 'absolute',
             'top': '0px',
             'left': '0px'
@@ -335,10 +329,9 @@ class PhysicsMenu extends React.Component {
                 <MenuText text="github" style={ contentStyle } url="https://www.github.com/JTan2231" number="1"/>
                 <MenuText text="linkedin" style={ contentStyle } url="https://www.linkedin.com/in/joseph-tan-478aa5186/" number="2"/>
                 <MenuText text="website source" style={ contentStyle } url="https://github.com/JTan2231/JTan2231.github.io/tree/dev" number="3"/>
-                <canvas style={ leftBackgroundStyle } onMouseLeave={ this.mouseLeaveLeftBackground.bind(this) }
-                        ref='leftBackgroundCanvas' width={ this.leftOffset } height={ this.height }/>
-                <canvas style={ backgroundStyle } ref='backgroundCanvas' width={ this.canvasWidth } height={ this.height }/>
-                <canvas style={ circlesStyle } ref='circleCanvas' width={ this.canvasWidth } height={ this.height }/>
+                <canvas style={ leftBackgroundStyle } ref={ this.leftBackgroundCanvas } width={ this.leftOffset } height={ this.height }/>
+                <canvas style={ backgroundStyle } ref={ this.backgroundCanvas } width={ this.canvasWidth } height={ this.height }/>
+                <canvas style={ circlesStyle } ref={ this.circleCanvas } width={ this.canvasWidth } height={ this.height }/>
             </div>
         );
     }
