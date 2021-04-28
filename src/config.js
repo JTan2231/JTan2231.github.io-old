@@ -7,7 +7,7 @@ export const BACKGROUND_COLOR = 'white';
 
 export const TEXT_RATIO = 0.75;
 
-export const CIRCLE_COLLISION = true;
+export const CIRCLE_COLLISION = false;
 
 export const MENU_CONTENT_HEIGHT = 36;
 export const UNDERSCORE_INTERVAL = 100;
