@@ -118,7 +118,7 @@ here down in the valley!
 
 O! What are you seeking, 
 And where are you making ? 
-The faggots are reeking, 
+The sticks are reeking, 
 
 The bannocks are baking! 
 O! tril-lil-lil-lolly 
