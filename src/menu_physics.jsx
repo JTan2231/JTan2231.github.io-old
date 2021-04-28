@@ -298,6 +298,30 @@ class PhysicsMenu extends React.Component {
             'cursor': 'none'
         };
 
+        const githubStyle = {
+            'zIndex': 4,
+            'position': 'absolute',
+            'color': 'white',
+            'fontFamily': 'Courier New',
+            'fontSize': config.MENU_CONTENT_HEIGHT/1.5+'px',
+            'width': 50*(1-config.TEXT_RATIO)+'%',
+            'left': 50*(1-config.TEXT_RATIO)+'%',
+            'height': config.MENU_CONTENT_HEIGHT,
+            'cursor': 'none'
+        };
+
+        const linkedinStyle = {
+            'zIndex': 5,
+            'position': 'absolute',
+            'top': '18px',
+            'color': 'white',
+            'fontFamily': 'Courier New',
+            'fontSize': config.MENU_CONTENT_HEIGHT/1.5+'px',
+            'width': 50*(1-config.TEXT_RATIO)+'%',
+            'height': config.MENU_CONTENT_HEIGHT,
+            'cursor': 'none'
+        };
+
         const backgroundStyle = {
             'zIndex': 1,
             'position': 'absolute',
@@ -321,14 +345,19 @@ class PhysicsMenu extends React.Component {
 
         const text = backgroundText[mathUtils.randomInt(backgroundText.length)];
 
+        const projectStart = 5;
+
         return (
             <div style={ pageStyle }
                  onMouseMove={ this.mouseMove.bind(this) }
                  onMouseLeave={ this.mouseLeave.bind(this) }>
                 <div style={ textStyle }>{ text }</div>
-                <MenuText text="github" style={ contentStyle } url="https://www.github.com/JTan2231" number="1"/>
-                <MenuText text="linkedin" style={ contentStyle } url="https://www.linkedin.com/in/joseph-tan-478aa5186/" number="2"/>
-                <MenuText text="website source" style={ contentStyle } url="https://github.com/JTan2231/JTan2231.github.io/tree/dev" number="3"/>
+                <MenuText text="github" style={ githubStyle } url="https://www.github.com/JTan2231" number="1"/>
+                <MenuText text="linkedin" style={ linkedinStyle } url="https://www.linkedin.com/in/joseph-tan-478aa5186/" number="1"/>
+                <MenuText text="website source" style={ contentStyle } url="https://github.com/JTan2231/JTan2231.github.io/tree/dev" number={ projectStart }/>
+                <MenuText text="bartholomew robot" style={ contentStyle } url="https://github.com/JTan2231/bartholomew" number={ projectStart+1 }/>
+                <MenuText text="stock prediction" style={ contentStyle } url="https://github.com/JTan2231/stock-price-regression-nn" number={ projectStart+2 }/>
+                <MenuText text="echo state network" style={ contentStyle } url="https://github.com/JTan2231/ESN" number={ projectStart+3 }/>
                 <canvas style={ leftBackgroundStyle } ref={ this.leftBackgroundCanvas } width={ this.leftOffset } height={ this.height }/>
                 <canvas style={ backgroundStyle } ref={ this.backgroundCanvas } width={ this.canvasWidth } height={ this.height }/>
                 <canvas style={ circlesStyle } ref={ this.circleCanvas } width={ this.canvasWidth } height={ this.height }/>
