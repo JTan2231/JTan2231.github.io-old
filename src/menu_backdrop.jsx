@@ -70,10 +70,14 @@ class PhysicsMenu extends React.Component {
     constructor(props) {
         super(props);
 
-        this.width = 0;
-        this.height = 0;
-        this.canvas_width = 0;
-        this.left_offset = 0;
+        if (props.width === undefined && props.height === undefined) {
+            this.width = 0;
+            this.height = 0;
+        }
+        else {
+            this.width = props.width;
+            this.height = props.height;
+        }
 
         this.state = {
             count: 0,
@@ -94,8 +98,11 @@ class PhysicsMenu extends React.Component {
     }
 
     componentDidMount() {
-        this.width = window.innerWidth;
-        this.height = window.innerHeight;
+        if (this.width === 0)
+            this.width = window.innerWidth;
+
+        if (this.height === 0)
+            this.height = window.innerHeight;
 
         this.canvasWidth = this.width * config.TEXT_RATIO;
         this.leftOffset = this.width * (1-config.TEXT_RATIO);
@@ -200,10 +207,6 @@ class PhysicsMenu extends React.Component {
         this.mouse.y = e.clientY;
     }
 
-    mouseEnterRightBackground(e) {
-        this.mouseLeaveLeftBackground(null);
-    }
-
     mouseLeave(e) {
         this.mouse.x = -1000;
         this.mouse.y = -1000;
@@ -218,21 +221,30 @@ class PhysicsMenu extends React.Component {
         context.stroke();
     }
 
+    getTextUrl(idx) {
+        switch (idx) {
+          case 1:
+            return "https://en.wikipedia.org/wiki/The_Hobbit";
+          case 0:
+            return "https://en.wikipedia.org/wiki/Ulysses_(novel)";
+          case 2:
+            return "https://en.wikipedia.org/wiki/Finnegans_Wake";
+        }
+    }
+
+
     tick() {
         if (!this.state.backgroundDrawn) {
+            // canvas for the background novel text
             var background = this.backgroundCanvas.current;
             var ctx = background.getContext('2d');
             ctx.fillStyle = config.BACKGROUND_COLOR;
             ctx.fillRect(0, 0, this.width*config.TEXT_RATIO, this.height);
 
-            background = this.leftBackgroundCanvas.current;
-            ctx = background.getContext('2d');
-            ctx.fillStyle = 'black';
-            ctx.fillRect(0, 0, this.leftOffset, this.height);
-
             this.setState({ backgroundDrawn: true });
         }
 
+        // everything below is for the physics of the circles
         const canvas = this.circleCanvas.current;
         const context = canvas.getContext('2d');
 
@@ -249,17 +261,10 @@ class PhysicsMenu extends React.Component {
         for (var i = 0; i < this.circles.length; i++)
             this.drawCircle(context, this.circles[i]);
 
-        const can = this.leftBackgroundCanvas.current;
-        const c = can.getContext('2d');
-
         context.save();
 
-        c.fillStyle = 'black';
-        c.fillRect(0, 0, this.leftOffset, this.height);
-        const blackCircle = new Circle([this.mouse.x-this.leftOffset, this.mouse.y], config.RADIUS_DEFAULT/2);
-        this.drawCircle(context, blackCircle, 'black');
-        const whiteCircle = new Circle([this.mouse.x, this.mouse.y], config.RADIUS_DEFAULT/40);
-        this.drawCircle(c, whiteCircle, 'white');
+        //const blackCircle = new Circle([this.mouse.x-this.leftOffset, this.mouse.y], config.CURSOR_RADIUS);
+        //this.drawCircle(context, blackCircle, 'black');
 
         context.restore();
 
@@ -270,8 +275,12 @@ class PhysicsMenu extends React.Component {
 
     render() {
         const pageStyle = {
-            'cursor': 'none',
-            'userSelect': 'none'
+            'userSelect': 'none',
+            'height': this.height,
+            'width': 100*config.TEXT_RATIO+'%',
+            'top': '0',
+            'left': 100*(1-config.TEXT_RATIO)+'%',
+            'position': 'absolute'
         }
 
         const textStyle = {
@@ -279,32 +288,27 @@ class PhysicsMenu extends React.Component {
             'position': 'absolute',
             'overflow': 'hidden',
             'height': this.height,
-            'width': 100*config.TEXT_RATIO+'%',
             'top': '0px',
-            'left': 100*(1-config.TEXT_RATIO)+'%',
             'color': config.BACKGROUND_COLOR,
             'fontFamily': 'verdana'
         };
 
-        const text = backgroundText[mathUtils.randomInt(backgroundText.length)];
+        const textIdx = mathUtils.randomInt(backgroundText.length);
+        const text = backgroundText[textIdx];
+        const textUrl = this.getTextUrl(textIdx);
 
         const projectStart = 5;
 
         return (
-            <div style={ pageStyle }
-                 onMouseMove={ this.mouseMove.bind(this) }
-                 onMouseLeave={ this.mouseLeave.bind(this) }>
-                <div style={ textStyle }>{ text }</div>
-                <MenuText text="github" style={ styles.githubStyle } url="https://www.github.com/JTan2231" number="1"/>
-                <MenuText text="linkedin" style={ styles.linkedinStyle } url="https://www.linkedin.com/in/joseph-tan-478aa5186/" number="1"/>
-                <MenuText text="kaggle" style={ styles.contentStyle } url="https://www.kaggle.com/jtan2231" number={ projectStart+1 }/>
-                <MenuText text="website source" style={ styles.contentStyle } url="https://github.com/JTan2231/JTan2231.github.io/tree/dev" number={ projectStart }/>
-                <MenuText text="bartholomew robot" style={ styles.contentStyle } url="https://github.com/JTan2231/bartholomew" number={ projectStart+2 }/>
-                <MenuText text="echo state network" style={ styles.contentStyle } url="https://github.com/JTan2231/ESN" number={ projectStart+3 }/>
-                <canvas style={ styles.leftBackgroundStyle } ref={ this.leftBackgroundCanvas } width={ this.leftOffset } height={ this.height }/>
-                <canvas style={ styles.backgroundStyle } ref={ this.backgroundCanvas } width={ this.canvasWidth } height={ this.height }/>
-                <canvas style={ styles.circlesStyle } ref={ this.circleCanvas } width={ this.canvasWidth } height={ this.height }/>
-            </div>
+            <a href={ textUrl }>
+                <div style={ pageStyle }
+                     onMouseMove={ this.mouseMove.bind(this) }
+                     onMouseLeave={ this.mouseLeave.bind(this) }>
+                    <div style={ textStyle }>{ text }</div>
+                    <canvas style={ styles.backgroundStyle } ref={ this.backgroundCanvas } width={ this.canvasWidth } height={ this.height }/>
+                    <canvas style={ styles.circlesStyle } ref={ this.circleCanvas } width={ this.canvasWidth } height={ this.height }/>
+                </div>
+            </a>
         );
     }
 }

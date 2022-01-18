@@ -1,6 +1,7 @@
-export const RADIUS_DEFAULT = 150;
+export const RADIUS_DEFAULT = 100;
+export const CURSOR_RADIUS = 15;
 export const INTERVAL = 1000/60; // 60 fps
-export const CIRCLE_COUNT = 5;
+export const CIRCLE_COUNT = 10;
 export const DEFAULT_TOLERANCE = 0.001;
 
 export const BACKGROUND_COLOR = 'white';

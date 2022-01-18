@@ -66,14 +66,12 @@ function forceOut(x1, x2, r1, r2) {
     return [p1, p2];
 }
 
-class PhysicsMenu extends React.Component {
+class MenuSelections extends React.Component {
     constructor(props) {
         super(props);
 
         this.width = 0;
         this.height = 0;
-        this.canvas_width = 0;
-        this.left_offset = 0;
 
         this.state = {
             count: 0,
@@ -200,10 +198,6 @@ class PhysicsMenu extends React.Component {
         this.mouse.y = e.clientY;
     }
 
-    mouseEnterRightBackground(e) {
-        this.mouseLeaveLeftBackground(null);
-    }
-
     mouseLeave(e) {
         this.mouse.x = -1000;
         this.mouse.y = -1000;
@@ -220,93 +214,46 @@ class PhysicsMenu extends React.Component {
 
     tick() {
         if (!this.state.backgroundDrawn) {
-            var background = this.backgroundCanvas.current;
+            var background = this.leftBackgroundCanvas.current;
             var ctx = background.getContext('2d');
-            ctx.fillStyle = config.BACKGROUND_COLOR;
-            ctx.fillRect(0, 0, this.width*config.TEXT_RATIO, this.height);
-
-            background = this.leftBackgroundCanvas.current;
-            ctx = background.getContext('2d');
-            ctx.fillStyle = 'black';
+            ctx.fillStyle = 'white';
             ctx.fillRect(0, 0, this.leftOffset, this.height);
 
             this.setState({ backgroundDrawn: true });
         }
 
-        const canvas = this.circleCanvas.current;
-        const context = canvas.getContext('2d');
-
-        context.clearRect(0, 0, this.width, this.height);
-
-        while (this.state.count < config.CIRCLE_COUNT) {
-            this.circles.push(new Circle([mathUtils.randomInt(this.width), mathUtils.randomInt(this.height)],
-                                          Math.max(config.RADIUS_DEFAULT/2, mathUtils.randomInt(config.RADIUS_DEFAULT*2))));
-
-            this.setState({ count: this.state.count+1 });
-        }
-
-        context.beginPath();
-        for (var i = 0; i < this.circles.length; i++)
-            this.drawCircle(context, this.circles[i]);
-
         const can = this.leftBackgroundCanvas.current;
         const c = can.getContext('2d');
-
-        context.save();
-
-        c.fillStyle = 'black';
-        c.fillRect(0, 0, this.leftOffset, this.height);
-        const blackCircle = new Circle([this.mouse.x-this.leftOffset, this.mouse.y], config.RADIUS_DEFAULT/2);
-        this.drawCircle(context, blackCircle, 'black');
-        const whiteCircle = new Circle([this.mouse.x, this.mouse.y], config.RADIUS_DEFAULT/40);
-        this.drawCircle(c, whiteCircle, 'white');
-
-        context.restore();
-
-        var states = this.calculateNextState();
-        states = this.checkCollisions(states);
-        this.updateStates(states);
     }
 
     render() {
         const pageStyle = {
-            'cursor': 'none',
-            'userSelect': 'none'
-        }
-
-        const textStyle = {
-            'zIndex': 4,
-            'position': 'absolute',
-            'overflow': 'hidden',
+            'userSelect': 'none',
             'height': this.height,
-            'width': 100*config.TEXT_RATIO+'%',
-            'top': '0px',
-            'left': 100*(1-config.TEXT_RATIO)+'%',
-            'color': config.BACKGROUND_COLOR,
-            'fontFamily': 'verdana'
+            'width': this.width,
+            'position': 'fixed',
+            'top': '0',
+            'left': '0.43%'
         };
 
-        const text = backgroundText[mathUtils.randomInt(backgroundText.length)];
-
-        const projectStart = 5;
+        var menuTextStart = 5;
+        var links = [<MenuText text="kaggle" style={ styles.contentStyle } url="https://www.kaggle.com/jtan2231" number={ menuTextStart++ }/>,
+                     <MenuText text="website source" style={ styles.contentStyle } url="https://github.com/JTan2231/JTan2231.github.io/tree/dev" number={ menuTextStart++ }/>,
+                     <MenuText text="bartholomew robot" style={ styles.contentStyle } url="https://github.com/JTan2231/bartholomew" number={ menuTextStart++ }/>,
+                     <MenuText text="echo state network" style={ styles.contentStyle } url="https://github.com/JTan2231/ESN" number={ menuTextStart++ }/>];
 
         return (
             <div style={ pageStyle }
                  onMouseMove={ this.mouseMove.bind(this) }
                  onMouseLeave={ this.mouseLeave.bind(this) }>
-                <div style={ textStyle }>{ text }</div>
                 <MenuText text="github" style={ styles.githubStyle } url="https://www.github.com/JTan2231" number="1"/>
                 <MenuText text="linkedin" style={ styles.linkedinStyle } url="https://www.linkedin.com/in/joseph-tan-478aa5186/" number="1"/>
-                <MenuText text="kaggle" style={ styles.contentStyle } url="https://www.kaggle.com/jtan2231" number={ projectStart+1 }/>
-                <MenuText text="website source" style={ styles.contentStyle } url="https://github.com/JTan2231/JTan2231.github.io/tree/dev" number={ projectStart }/>
-                <MenuText text="bartholomew robot" style={ styles.contentStyle } url="https://github.com/JTan2231/bartholomew" number={ projectStart+2 }/>
-                <MenuText text="echo state network" style={ styles.contentStyle } url="https://github.com/JTan2231/ESN" number={ projectStart+3 }/>
+                <MenuText text="twitter" style={ styles.linkedinStyle } url="https://www.twitter.com/joeymtan/" number="2"/>
+                { links }
                 <canvas style={ styles.leftBackgroundStyle } ref={ this.leftBackgroundCanvas } width={ this.leftOffset } height={ this.height }/>
-                <canvas style={ styles.backgroundStyle } ref={ this.backgroundCanvas } width={ this.canvasWidth } height={ this.height }/>
-                <canvas style={ styles.circlesStyle } ref={ this.circleCanvas } width={ this.canvasWidth } height={ this.height }/>
             </div>
         );
     }
 }
 
-export default PhysicsMenu;
+export default MenuSelections;

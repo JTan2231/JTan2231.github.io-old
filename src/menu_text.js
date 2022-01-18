@@ -7,10 +7,13 @@ export class MenuText extends React.Component {
 
         this.frequency = 1;
 
+        this.build_frequency = 15;
+
         this.mounted = false;
         this.underscoreInterval = config.UNDERSCORE_INTERVAL;
 
         this.url = props.url;
+        this.title = props.text;
 
         var style = { 'useless': null };
 
@@ -21,8 +24,10 @@ export class MenuText extends React.Component {
 
         this.state = {
             hovered: false,
+            built: false,
+            build_index: 0,
             clock: 1,
-            text: props.text,
+            text: '',
             style: style
         };
     }
@@ -50,8 +55,31 @@ export class MenuText extends React.Component {
         return text
     }
 
+    buildText() {
+        var text = this.state.text;
+        var idx = this.state.build_index;
+
+        if (text === this.title) {
+            this.setState({ built: true, clock: 1 });
+            return;
+        }
+
+        text += this.title[idx];
+        idx++;
+        this.setState({
+            text: text,
+            build_index: idx,
+            clock: 1
+        });
+    }
+
     tick() {
         var text = this.state.text, clock = this.state.clock + 1;
+        if (!this.state.built && clock - this.build_frequency === 0) {
+            this.buildText();
+            return;
+        }
+
         if (this.state.hovered && this.state.clock % this.underscoreInterval === 0) {
             text = this.updateText();
             clock = 1;
@@ -64,24 +92,28 @@ export class MenuText extends React.Component {
     }
 
     mouseEnter(e) {
-        var text = this.updateText();
-        this.setState({
-            hovered: true,
-            text: text,
-            clock: 1
-        });
+        if (this.state.built) {
+            var text = this.updateText();
+            this.setState({
+                hovered: true,
+                text: text,
+                clock: 1
+            });
+        }
     }
 
     mouseLeave(e) {
-        var text = this.state.text;
-        if (text[text.length-1] === '_')
-            text = text.substring(0, text.length-1);
+        if (this.state.built) {
+            var text = this.state.text;
+            if (text[text.length-1] === '_')
+                text = text.substring(0, text.length-1);
 
-        this.setState({
-            hovered: false,
-            text: text,
-            clock: 1
-        });
+            this.setState({
+                hovered: false,
+                text: text,
+                clock: 1
+            });
+        }
     }
 
     render() {

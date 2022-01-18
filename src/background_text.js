@@ -1,3 +1,7 @@
+// 1. Ulysses
+// 2. The Hobbit
+// 3. Finnegan's Wake
+
 const backgroundText = [`DESHIL HOLLES EAMUS. DESHIL HOLLES EAMUS. DESHIL HOLES Eamus.
 
 Send us, bright one, light one, Horhorn, quickening and wombfruit. Send us, bright one, light one, Horhorn, quickening and wombfruit. Send us bright one, light one, Horhorn, quickening and wombfruit.
