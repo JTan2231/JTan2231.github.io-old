@@ -82,7 +82,8 @@ class PhysicsMenu extends React.Component {
         this.state = {
             count: 0,
             clock: 0,
-            backgroundDrawn: false
+            backgroundDrawn: false,
+            rendering: true
         };
 
         this.mouse = {
@@ -92,8 +93,10 @@ class PhysicsMenu extends React.Component {
         this.circles = [];
         this.collisions = [];
 
+        this.forceScalar = 1;
+        this.textIdx = props.textIndex;
+
         this.backgroundCanvas = React.createRef();
-        this.leftBackgroundCanvas = React.createRef();
         this.circleCanvas = React.createRef();
     }
 
@@ -112,13 +115,25 @@ class PhysicsMenu extends React.Component {
         );
     }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.rendering !== this.state.rendering) {
+            if (prevProps.rendering === false) { 
+                const canvas = this.circleCanvas.current;
+                const context = canvas.getContext('2d');
+                context.clearRect(0, 0, this.width, this.height);
+            }
+
+            this.setState({ rendering: prevProps.rendering });
+        }
+    }
+
     calculateNextState() {
         var positions = [];
         var velocities = [];
         for (var i = 0; i < this.circles.length; i++) {
             positions.push(vec2d.addVec2D(this.circles[i].position, this.circles[i].velocity));
             var g = new vec2d.Vector2D([mathUtils.randomSign()*Math.random(), mathUtils.randomSign()*Math.random()]);
-            g = vec2d.scalarMultVec2D(1/this.circles[i].mass, g);
+            g = vec2d.scalarMultVec2D(this.forceScalar/this.circles[i].mass, g);
             velocities.push(vec2d.addVec2D(this.circles[i].velocity, g));
         }
 
@@ -232,45 +247,47 @@ class PhysicsMenu extends React.Component {
         }
     }
 
+    drawBackground() {
+        var background = this.backgroundCanvas.current;
+        var ctx = background.getContext('2d');
+        ctx.fillStyle = config.BACKGROUND_COLOR;
+        ctx.fillRect(0, 0, this.width*config.TEXT_RATIO, this.height);
+    }
 
     tick() {
         if (!this.state.backgroundDrawn) {
             // canvas for the background novel text
-            var background = this.backgroundCanvas.current;
-            var ctx = background.getContext('2d');
-            ctx.fillStyle = config.BACKGROUND_COLOR;
-            ctx.fillRect(0, 0, this.width*config.TEXT_RATIO, this.height);
+            this.drawBackground();
 
             this.setState({ backgroundDrawn: true });
         }
 
-        // everything below is for the physics of the circles
-        const canvas = this.circleCanvas.current;
-        const context = canvas.getContext('2d');
+        if (this.state.rendering) {
+            // everything below is for the physics of the circles
+            const canvas = this.circleCanvas.current;
+            const context = canvas.getContext('2d');
 
-        context.clearRect(0, 0, this.width, this.height);
+            context.clearRect(0, 0, this.width, this.height);
 
-        while (this.state.count < config.CIRCLE_COUNT) {
-            this.circles.push(new Circle([mathUtils.randomInt(this.width), mathUtils.randomInt(this.height)],
-                                          Math.max(config.RADIUS_DEFAULT/2, mathUtils.randomInt(config.RADIUS_DEFAULT*2))));
+            while (this.state.count < config.CIRCLE_COUNT) {
+                this.circles.push(new Circle([mathUtils.randomInt(this.width), mathUtils.randomInt(this.height)],
+                                              Math.max(config.RADIUS_DEFAULT/2, mathUtils.randomInt(config.RADIUS_DEFAULT*2))));
 
-            this.setState({ count: this.state.count+1 });
+                this.setState({ count: this.state.count+1 });
+            }
+
+            context.beginPath();
+            for (var i = 0; i < this.circles.length; i++)
+                this.drawCircle(context, this.circles[i]);
+
+            context.save();
+
+            context.restore();
+
+            var states = this.calculateNextState();
+            states = this.checkCollisions(states);
+            this.updateStates(states);
         }
-
-        context.beginPath();
-        for (var i = 0; i < this.circles.length; i++)
-            this.drawCircle(context, this.circles[i]);
-
-        context.save();
-
-        //const blackCircle = new Circle([this.mouse.x-this.leftOffset, this.mouse.y], config.CURSOR_RADIUS);
-        //this.drawCircle(context, blackCircle, 'black');
-
-        context.restore();
-
-        var states = this.calculateNextState();
-        states = this.checkCollisions(states);
-        this.updateStates(states);
     }
 
     render() {
@@ -293,9 +310,8 @@ class PhysicsMenu extends React.Component {
             'fontFamily': 'verdana'
         };
 
-        const textIdx = mathUtils.randomInt(backgroundText.length);
-        const text = backgroundText[textIdx];
-        const textUrl = this.getTextUrl(textIdx);
+        const text = backgroundText[this.textIdx];
+        const textUrl = this.getTextUrl(this.textIdx);
 
         const projectStart = 5;
 

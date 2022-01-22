@@ -7,7 +7,7 @@ export class MenuText extends React.Component {
 
         this.frequency = 1;
 
-        this.build_frequency = 15;
+        this.build_frequency = 6;
 
         this.mounted = false;
         this.underscoreInterval = config.UNDERSCORE_INTERVAL;
@@ -36,7 +36,7 @@ export class MenuText extends React.Component {
         this.mounted = true;
         if (this.mounted) {
             this.timerID = setInterval(
-                () => this.tick(), this.frequency
+                () => this.tick(), config.INTERVAL
             );
         }
     }
@@ -117,6 +117,16 @@ export class MenuText extends React.Component {
     }
 
     render() {
+        if (this.url.length === 0) {
+            return (
+                <a>
+                    <div style={ this.state.style }
+                         onMouseEnter={ this.mouseEnter.bind(this) }
+                         onMouseLeave={ this.mouseLeave.bind(this) }>{ this.state.text }</div>
+                </a>
+            );
+        }
+
         return (
             <a href={ this.url }>
                 <div style={ this.state.style }

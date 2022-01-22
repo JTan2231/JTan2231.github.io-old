@@ -4,6 +4,7 @@ import * as mathUtils from './math_utils.js';
 import * as config from './config.js';
 import { backgroundText } from './background_text.js';
 import { MenuText } from './menu_text.js';
+import { Transition } from './transition.jsx';
 import { styles } from './menu_styles.js';
 
 // see https://en.wikipedia.org/wiki/Elastic_collision#Two-dimensional_collision_with_two_moving_objects
@@ -233,7 +234,8 @@ class MenuSelections extends React.Component {
             'width': this.width,
             'position': 'fixed',
             'top': '0',
-            'left': '0.43%'
+            'left': '0.43%',
+            //'zIndex': 100
         };
 
         var menuTextStart = 5;
