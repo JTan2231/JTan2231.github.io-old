@@ -1,5 +1,4 @@
 import React from 'react';
-import * as vec2d from './vec2d.js';
 import * as mathUtils from './math_utils.js';
 import * as config from './config.js';
 import { backgroundText } from './background_text.js';
@@ -8,6 +7,7 @@ import { styles } from './menu_styles.js';
 import PhysicsMenu from './menu_backdrop.jsx';
 import MenuSelections from './menu_selections.jsx';
 import { Transition } from './transition.jsx';
+import { Writings } from './writings.jsx';
 
 class MainMenu extends React.Component {
     constructor(props) {
@@ -53,28 +53,19 @@ class MainMenu extends React.Component {
     }
 
     render() {
-        var x;
-        if (this.state.rendering) {
-            x = 'none';
+        var rendering = this.state.rendering;
+        var smallScreen = false;
+        if (this.width < 500) {
+            rendering = false;
+            smallScreen = true;
         }
-        else {
-            x = 'block';
-        }
-        const style = {
-            'display': x,
-            'font-size': '100px',
-            'left': '50%',
-            'top': '50%',
-            'position': 'absolute',
-            'zIndex': 50
-        };
 
         return (
             <div>
-                <MenuSelections />
-                <Transition ref={ this.transition } cont={ this.state.cont } totalWidth={ window.innerWidth * config.TEXT_RATIO } height={ window.innerHeight }/>
-                <div style={ style }>testing</div>
-                <PhysicsMenu textIndex={ this.textIndex } rendering={ this.state.rendering } width={ this.width } height = { this.height } />
+                <MenuSelections small={ smallScreen } />
+                <Transition ref={ this.transition } small={ smallScreen } text={ "Writings" } cont={ this.state.cont } totalWidth={ window.innerWidth * config.TEXT_RATIO } height={ window.innerHeight } />
+                <Writings display={ !rendering } small={ smallScreen } />
+                <PhysicsMenu textIndex={ this.textIndex } rendering={ rendering } width={ this.width } height = { this.height } />
             </div>
         );
     }

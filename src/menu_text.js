@@ -20,7 +20,8 @@ export class MenuText extends React.Component {
         for (const [key, value] of Object.entries(props.style))
             style[key] = value;
 
-        style['top'] = (props.number-0.5)*config.MENU_CONTENT_HEIGHT;
+        var menuContentHeight = config.MENU_CONTENT_HEIGHT_SCALAR * window.innerHeight;
+        style['top'] = (props.number-0.5) * menuContentHeight;//config.MENU_CONTENT_HEIGHT;
 
         this.state = {
             hovered: false,

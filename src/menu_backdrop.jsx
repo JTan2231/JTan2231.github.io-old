@@ -228,8 +228,14 @@ class PhysicsMenu extends React.Component {
     }
 
     drawCircle(context, circle, color='black') {
+        var circleRadius = circle.radius;
+        if (circleRadius > 0.25*this.canvasWidth) {
+            circleRadius = Math.round(circleRadius / 4);
+            circleRadius = Math.max(circleRadius, config.RADIUS_DEFAULT/10);
+        }
+
         context.beginPath();
-        context.arc(circle.position.x, circle.position.y, circle.radius, 0, 2*Math.PI, false);
+        context.arc(circle.position.x, circle.position.y, circleRadius, 0, 2*Math.PI, false);
         context.fillStyle = color;
         context.strokeStyle = color;
         context.fill();

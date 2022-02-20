@@ -2,6 +2,8 @@ import * as config from './config.js';
 
 const textColor = 'black';
 
+const linkFontSize = config.TEXT_RATIO*150+'%';
+
 export const styles = {
     pageStyle: {
         'userSelect': 'none'
@@ -22,7 +24,7 @@ export const styles = {
         'position': 'absolute',
         'color': textColor,
         'fontFamily': 'Courier New',
-        'fontSize': config.MENU_CONTENT_HEIGHT/1.5+'px',
+        'fontSize': linkFontSize,
         'width': 50*(1-config.TEXT_RATIO)+'%',
         'left': 50*(1-config.TEXT_RATIO)+'%',
         'height': config.MENU_CONTENT_HEIGHT,
@@ -34,7 +36,7 @@ export const styles = {
         'top': '18px',
         'color': textColor,
         'fontFamily': 'Courier New',
-        'fontSize': config.MENU_CONTENT_HEIGHT/1.5+'px',
+        'fontSize': linkFontSize,
         'width': 50*(1-config.TEXT_RATIO)+'%',
         'height': config.MENU_CONTENT_HEIGHT,
     },

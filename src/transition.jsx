@@ -18,6 +18,9 @@ export class Transition extends React.Component {
         this.baseAccel = this.totalWidth / (this.duration*this.duration);
         this.transitionCanvas = React.createRef();
 
+        this.smallScreen = props.small;
+        this.text = props.text;
+
         this.tol = 0.5;
 
         this.state = {
@@ -38,7 +41,7 @@ export class Transition extends React.Component {
         this.mounted = true;
         if (this.mounted) {
             this.timerID = setInterval(
-                () => this.tick(), this.frequency
+                () => this.tick(), config.INTERVAL
             );
         }
     }
@@ -230,16 +233,25 @@ export class Transition extends React.Component {
             'position': 'absolute',
             'top': '0px',
             'left': this.state.left+'px',
-            'background': config.BACKGROUND_COLOR,
+            'background': 'black',//config.BACKGROUND_COLOR,
             'width': this.state.width+'px',
             'height': window.innerHeight+'px',
             'zIndex': 100
         };
+
+        var style = styles.linkedinStyle;
+        style.width = '25%';
+
+        var x = 'block';
+        if (this.smallScreen) {
+            x = 'none';
+        }
+
         return (
-            <div>
+            <div style={{ 'display': x }}>
                 <div style={ transitionBackgroundStyle }/>
                 <div onClick={ this.onClick.bind(this) }>
-                    <MenuText text="transition me" style={ styles.linkedinStyle } url="" number="25"/>
+                    <MenuText text={ this.text } style={ styles.linkedinStyle } url="" number="23"/>
                 </div>
             </div>
         );
