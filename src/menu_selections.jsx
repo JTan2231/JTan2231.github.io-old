@@ -97,7 +97,7 @@ class MenuSelections extends React.Component {
         var menuTextVar = menuTextStart;
         var links = [<MenuText text="kaggle" style={ contentStyle } url="https://www.kaggle.com/jtan2231" number={ menuTextVar++ }/>,
                      <MenuText text="website source" style={ contentStyle } url="https://github.com/JTan2231/JTan2231.github.io/tree/dev" number={ menuTextVar++ }/>,
-                     <MenuText text="bartholomew robot" style={ contentStyle } url="https://github.com/JTan2231/bartholomew" number={ menuTextVar++ }/>,
+                     <MenuText text="depth estimation" style={ contentStyle } url="https://github.com/JTan2231/depth-prediction" number={ menuTextVar++ }/>,
                      <MenuText text="echo state network" style={ contentStyle } url="https://github.com/JTan2231/ESN" number={ menuTextVar++ }/>];
 
         var media = [<MenuText text="github" style={ gitTestStyle } url="https://www.github.com/JTan2231" number="1"/>,
@@ -113,7 +113,7 @@ class MenuSelections extends React.Component {
 
             finalLinks = [<MenuText text="kaggle" style={ contentStyle } url="https://www.kaggle.com/jtan2231" number={ menuTextStart+2 }/>,
                           <MenuText text="website source" style={ contentStyle } url="https://github.com/JTan2231/JTan2231.github.io/tree/dev" number={ menuTextStart+4 }/>,
-                          <MenuText text="bartholomew robot" style={ contentStyle } url="https://github.com/JTan2231/bartholomew" number={ menuTextStart+6 }/>,
+                          <MenuText text="depth estimation" style={ contentStyle } url="https://github.com/JTan2231/depth-prediction" number={ menuTextStart+6 }/>,
                           <MenuText text="echo state network" style={ contentStyle } url="https://github.com/JTan2231/ESN" number={ menuTextStart+8 }/>];
         }
 
