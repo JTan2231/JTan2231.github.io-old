@@ -1,9 +1,7 @@
 import React from 'react';
-import * as config from './config.js';
-import { styles } from './menu_styles.js';
-import { essays } from './test_text.js';
+import { essays } from '../util/test_text.js';
 import { CommandLineInput } from './cmd_input.jsx';
-import './writings.css';
+import '../stylesheets/writings.css';
 
 export class Writings extends React.Component {
     constructor(props) {
@@ -123,8 +121,9 @@ export class Writings extends React.Component {
 
     getTitleDivs() {
         var divs = [];
-        for (const [title, essay] of Object.entries(essays)) {
-            const essayFunction = function (x) { this.displayEssay(x) };
+        for (const entry of Object.entries(essays)) {
+            var title = entry[0];
+            //const essayFunction = function (x) { this.displayEssay(x) };
 
             divs.push
             (
@@ -177,12 +176,6 @@ export class Writings extends React.Component {
             'overflowY': 'scroll',
             'fontFamily': 'Courier New',
             'textIndent': '50px',
-        };
-
-        const inputStyle = {
-            'border': 0,
-            'outlineWidth': 0,
-            'width': '40%',
         };
 
         const essayStyle = {

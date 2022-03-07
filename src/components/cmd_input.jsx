@@ -1,7 +1,5 @@
 import React from 'react';
-import * as config from './config.js';
-import { styles } from './menu_styles.js';
-import './writings.css';
+import '../stylesheets/writings.css';
 
 export class CommandLineInput extends React.Component {
     constructor(props) {
@@ -30,6 +28,7 @@ export class CommandLineInput extends React.Component {
 
     tick() {
         const inputCanvas = this.inputCanvas.current;
+        var x;
         if (this.state['inputChangingUp'] && this.inputCanvas) {
             const ctx = inputCanvas.getContext('2d');
 
@@ -37,7 +36,7 @@ export class CommandLineInput extends React.Component {
             ctx.fillStyle = 'black';
             ctx.fillRect(0, 0, inputCanvas.width, this.state['inputFocusCount']);
 
-            var x = this.state['inputChangingUp'] ? this.state['inputFocusCount'] !== inputCanvas.height : !this.state.['inputChangingUp'];
+            x = this.state['inputChangingUp'] ? this.state['inputFocusCount'] !== inputCanvas.height : !this.state.['inputChangingUp'];
 
             this.setState({
                 'inputChangingUp': x,
@@ -51,7 +50,7 @@ export class CommandLineInput extends React.Component {
             ctx.fillStyle = 'black';
             ctx.fillRect(0, 0, inputCanvas.width, this.state['inputFocusCount']);
 
-            var x = this.state['inputChangingDown'] ? this.state['inputFocusCount'] !== this.canvasMin : !this.state.['inputChangingDown'];
+            x = this.state['inputChangingDown'] ? this.state['inputFocusCount'] !== this.canvasMin : !this.state.['inputChangingDown'];
 
             this.setState({
                 'inputChangingDown': x,

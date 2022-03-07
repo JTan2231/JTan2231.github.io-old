@@ -1,10 +1,9 @@
 import React from 'react';
-import * as vec2d from './vec2d.js';
-import * as mathUtils from './math_utils.js';
-import * as config from './config.js';
-import { backgroundText } from './background_text.js';
-import { MenuText } from './menu_text.js';
-import { styles } from './menu_styles.js';
+import * as vec2d from '../util/vec2d.js';
+import * as mathUtils from '../util/math_utils.js';
+import * as config from '../util/config.js';
+import { backgroundText } from '../util/background_text.js';
+import { styles } from '../util/menu_styles.js';
 
 // see https://en.wikipedia.org/wiki/Elastic_collision#Two-dimensional_collision_with_two_moving_objects
 function elasticCollision2D(x1, x2, v1, v2, m1, m2) {
@@ -250,6 +249,8 @@ class PhysicsMenu extends React.Component {
             return "https://en.wikipedia.org/wiki/Ulysses_(novel)";
           case 2:
             return "https://en.wikipedia.org/wiki/Finnegans_Wake";
+          default:
+            return "https://www.github.com/JTan2231/";
         }
     }
 
@@ -318,8 +319,6 @@ class PhysicsMenu extends React.Component {
 
         const text = backgroundText[this.textIdx];
         const textUrl = this.getTextUrl(this.textIdx);
-
-        const projectStart = 5;
 
         return (
             <a href={ textUrl }>

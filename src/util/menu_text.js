@@ -120,11 +120,11 @@ export class MenuText extends React.Component {
     render() {
         if (this.url.length === 0) {
             return (
-                <a>
+                <div>
                     <div style={ this.state.style }
                          onMouseEnter={ this.mouseEnter.bind(this) }
                          onMouseLeave={ this.mouseLeave.bind(this) }>{ this.state.text }</div>
-                </a>
+                </div>
             );
         }
 

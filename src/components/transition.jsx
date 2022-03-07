@@ -1,7 +1,7 @@
 import React from 'react';
-import * as config from './config.js';
-import { MenuText } from './menu_text.js';
-import { styles } from './menu_styles.js';
+import * as config from '../util/config.js';
+import { MenuText } from '../util/menu_text.js';
+import { styles } from '../util/menu_styles.js';
 
 export class Transition extends React.Component {
     constructor(props) {
@@ -63,8 +63,10 @@ export class Transition extends React.Component {
 
         vel = Math.min(this.maxVel, vel+accel);
 
+        var newWidth;
+
         if (!this.state.regressing) {
-            var newWidth = width + vel;
+            newWidth = width + vel;
             // we've made it to the end
             if (newWidth+this.tol >= this.totalWidth) {
                 width = this.totalWidth;
@@ -90,7 +92,7 @@ export class Transition extends React.Component {
             });
         }
         else {
-            var newWidth = width - vel;
+            newWidth = width - vel;
             var newLeft = left + vel;
 
             if (this.state.halfway) {
@@ -139,10 +141,12 @@ export class Transition extends React.Component {
         var regressing = this.state.regressing;
         var halfway = this.totalWidth / 2;
 
+        var newWidth;
+
         vel = Math.min(this.maxVel, vel+accel);
 
         if (!this.state.regressing) {
-            var newWidth = width + vel;
+            newWidth = width + vel;
             var newLeft = left - vel;
             // we've made it to the end
             if (newWidth+this.tol >= this.totalWidth) {
@@ -172,7 +176,7 @@ export class Transition extends React.Component {
             });
         }
         else {
-            var newWidth = width - vel;
+            newWidth = width - vel;
 
             if (this.state.halfway) {
                 this.setState({ halfway: false });

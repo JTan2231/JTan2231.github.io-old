@@ -1,9 +1,7 @@
 import React from 'react';
-import * as mathUtils from './math_utils.js';
-import * as config from './config.js';
-import { backgroundText } from './background_text.js';
-import { MenuText } from './menu_text.js';
-import { styles } from './menu_styles.js';
+import * as mathUtils from '../util/math_utils.js';
+import * as config from '../util/config.js';
+import { backgroundText } from '../util/background_text.js';
 import PhysicsMenu from './menu_backdrop.jsx';
 import MenuSelections from './menu_selections.jsx';
 import { Transition } from './transition.jsx';

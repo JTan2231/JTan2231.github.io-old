@@ -1,8 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-//import PhysicsMenu from './menu_physics.jsx';
-import MainMenu from './main_page.jsx';
-import MenuSelections from './menu_selections.jsx';
+import MainMenu from './components/main_page.jsx';
 
 ReactDOM.render(
   <React.StrictMode>

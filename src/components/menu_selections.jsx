@@ -1,11 +1,7 @@
 import React from 'react';
-import * as vec2d from './vec2d.js';
-import * as mathUtils from './math_utils.js';
-import * as config from './config.js';
-import { backgroundText } from './background_text.js';
-import { MenuText } from './menu_text.js';
-import { Transition } from './transition.jsx';
-import { styles } from './menu_styles.js';
+import * as config from '../util/config.js';
+import { MenuText } from '../util/menu_text.js';
+import { styles } from '../util/menu_styles.js';
 
 class MenuSelections extends React.Component {
     constructor(props) {
@@ -53,9 +49,6 @@ class MenuSelections extends React.Component {
 
             this.setState({ backgroundDrawn: true });
         }
-
-        const can = this.leftBackgroundCanvas.current;
-        const c = can.getContext('2d');
     }
 
     render() {
