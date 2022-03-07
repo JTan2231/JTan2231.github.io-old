@@ -1,6 +1,6 @@
 export const essays = {
-    "Home": [`A collection of essays, both finished and otherwise.`],
-    "Neural Mirrors": [
+    "home.txt": [`A collection of essays, both finished and otherwise.`],
+    "neural_mirrors.txt": [
         `A neural network, the family AI algorithms that run many modern recommendation and computer vision systems, is just a really good function approximator. It never gets the exact representation of the function – even nature can’t do that – but it often gets closer than any other methods we have come up with. This function could be that which determines what YouTube videos you would be most inclined to watch next. Its inputs would be what you have previously watched, and its outputs would be the videos that show up in your recommendation feed. Imagine a blurry image increasing in clarity as the function approaches a better approximation, or your increasing understanding as you get better at a certain skill.`,
         `Inputs are thrown into the function and transformed into whatever the outputs may be. This idea of functions representing transformations – your YouTube watch history (input) → your YouTube recommendation feed (output) – is immensely powerful because it can be used to model basically everything going on in the world, and the success of neural networks is representative of that idea. (Wittgenstein, Plato, theory of forms?)`,
         `Aside from being a neat and useful set of algorithms, I think neural networks are mathematical analogs to the biological mechanisms which govern our minds and bodies. There are countless methods and techniques that go into the training and creation of these networks that have an uncanny symmetry with our own best methods of learning and ways of thinking. A thorough understanding of the systems which make successful neural networks may yield a similar understanding of our own biological systems.`,
@@ -16,7 +16,7 @@ export const essays = {
         `In training a neural network, we are guiding it around a hugely multidimensional object, the shape of which can only be determined through myriad perspectives. Likewise, in learning something we are taking ourselves through many different perspectives, integrating (with varying degrees) the perspectives of both our predecessors and our own observations.`,
         `[1]: To think and understand refers to the action of actively doing and/or thinking through something. This uses the assumption that in deliberately doing something, you’re actively thinking about what you’re doing.`
     ],
-    "Test Essay": [
+    "test_essay.txt": [
         `Random filler essay to test having several different essays to choose from the top.`,
         `A few weeks ago, I got obsessed with the idea of fractility in nature, both physically and abstractly. The idea of repeating patterns in different areas seemed absolutely amazing because I felt like I had been seeing it all my life. That, and having seen things before relating fractalism and architecture (source to come), led me to the following tweet:`,
         `"A solution exists to a problem iff both the solution and problem exist elsewhere in a different context and I refuse to believe anything otherwise."`,

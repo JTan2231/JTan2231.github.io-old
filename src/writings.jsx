@@ -2,6 +2,8 @@ import React from 'react';
 import * as config from './config.js';
 import { styles } from './menu_styles.js';
 import { essays } from './test_text.js';
+import { CommandLineInput } from './cmd_input.jsx';
+import './writings.css';
 
 export class Writings extends React.Component {
     constructor(props) {
@@ -9,6 +11,9 @@ export class Writings extends React.Component {
 
         this.state = {
             'displayChange': props.display,
+            'inputChangingUp': false,
+            'inputChangingDown': false,
+            'inputFocusCount': 0
         };
 
         this.display = 'block';
@@ -16,10 +21,34 @@ export class Writings extends React.Component {
             this.display = 'none';
         }
 
+        this.canvasInterval = 30;
+
         this.small = props.small;
 
-        this.paragraphs = this.generateParagraphs("Home");
+        this.paragraphs = '';//this.generateParagraphs("Home");
+
         this.essayDiv = React.createRef();
+        this.errorDiv = React.createRef();
+        this.cmdInput = React.createRef();
+    }
+
+    tick() {
+        if (this.cmdInput !== undefined && this.cmdInput !== null) {
+            if (this.cmdInput.current.state['queryReturn'] !== null) {
+                this.displayEssay(this.cmdInput.current.state['queryReturn']);
+            }
+        }
+
+        return;
+    }
+ 
+    componentDidMount() {
+        this.mounted = true;
+        if (this.mounted) {
+            this.timerID = setInterval(
+                () => this.tick(), this.canvasInterval
+            );
+        }
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -46,9 +75,7 @@ export class Writings extends React.Component {
     generateParagraphs(essayName) {
         const essay = essays[essayName];
         var paragraphs = [];
-        //paragraphs = this.addLineBreaks(paragraphs, 1);
         paragraphs.push(<h1>{ essayName }</h1>);
-        //paragraphs = this.addLineBreaks(paragraphs, 1);
 
         for (var i = 0; i < essay.length; i++) {
             paragraphs.push(<p>{ essay[i] }</p>);
@@ -69,6 +96,13 @@ export class Writings extends React.Component {
         });
 
         this.setState({ displayChange: this.state.displayChange });
+    }
+
+    drawBackground() {
+        var background = this.inputCanvas.current;
+        var ctx = background.getContext('2d');
+        ctx.fillStyle = 'black';
+        ctx.fillRect(0, 0, background.width, background.height);
     }
 
     processTitle(title) {
@@ -145,6 +179,12 @@ export class Writings extends React.Component {
             'textIndent': '50px',
         };
 
+        const inputStyle = {
+            'border': 0,
+            'outlineWidth': 0,
+            'width': '40%',
+        };
+
         const essayStyle = {
             'fontSize': essayFontSize,
         };
@@ -164,6 +204,7 @@ export class Writings extends React.Component {
                             </tr>
                         </table>
                         <div style={ essayStyle }>
+                            <CommandLineInput ref={ this.cmdInput } search={ essays } />
                             { this.paragraphs }
                         </div>
                     </div>
