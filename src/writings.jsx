@@ -129,7 +129,7 @@ export class Writings extends React.Component {
             divs.push
             (
                 <td style={{ 'width': '33%', 'textAlign': 'center' }}>
-                    <div onClick={ () => essayFunction.bind(this)(title) }>
+                    <div/* onClick={ () => essayFunction.bind(this)(title) }*/>
                         { this.processTitle(title) }
                     </div>
                 </td>
