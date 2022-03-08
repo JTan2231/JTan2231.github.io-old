@@ -1,6 +1,7 @@
 import React from 'react';
 import { essays } from '../util/test_text.js';
 import { CommandLineInput } from './cmd_input.jsx';
+import { TextHighlight } from './text_highlight.jsx';
 import '../stylesheets/writings.css';
 
 export class Writings extends React.Component {
@@ -187,6 +188,8 @@ export class Writings extends React.Component {
             'width': '100%',
         };
 
+        const highlightLength = 0.4 * window.innerWidth;
+
         return (
             <div style={{ 'display': this.display }}>
                 <div style={ writingStyle }>
@@ -198,6 +201,21 @@ export class Writings extends React.Component {
                         </table>
                         <div style={ essayStyle }>
                             <CommandLineInput ref={ this.cmdInput } search={ essays } />
+                            <TextHighlight fontSize={ essayFontSize }
+                                           totalWidth={ highlightLength }
+                                           text="small test" />
+                            <TextHighlight fontSize={ essayFontSize }
+                                           totalWidth={ highlightLength }
+                                           text="the medium test" />
+                            <TextHighlight fontSize={ essayFontSize }
+                                           totalWidth={ highlightLength }
+                                           text="this is the large test" />
+                            <TextHighlight fontSize={ essayFontSize }
+                                           totalWidth={ highlightLength }
+                                           text="this, this is the largest test" />
+                            <TextHighlight fontSize={ essayFontSize }
+                                           totalWidth={ highlightLength }
+                                           text="however, one may consider this to be the largest test" />
                             { this.paragraphs }
                         </div>
                     </div>

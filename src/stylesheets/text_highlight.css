@@ -1,0 +1,13 @@
+.text {
+    color: black;
+    transition: color 0.8s;
+
+    position: absolute;
+    top: 0%;
+    background-color: rgba(255, 255, 255, 0.01);
+    z-index: 1;
+}
+
+.text:hover {
+    color: white;
+}
