@@ -176,7 +176,7 @@ export class Writings extends React.Component {
             'paddingRight': '50px',
             'overflowY': 'scroll',
             'fontFamily': 'Courier New',
-            'textIndent': '50px',
+            'textIndent': '3.1em',
         };
 
         const essayStyle = {
