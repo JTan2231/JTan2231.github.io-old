@@ -254,8 +254,8 @@ export class Transition extends React.Component {
         return (
             <div style={{ 'display': x }}>
                 <div style={ transitionBackgroundStyle }/>
-                <div onClick={ this.onClick.bind(this) }>
-                    <MenuText text={ this.text } style={ styles.linkedinStyle } url="" number="23"/>
+                <div style={{ 'cursor': 'default' }} onClick={ this.onClick.bind(this) }>
+                    <MenuText text={ this.text } style={ styles.linkedinStyle } url="" number="10"/>
                 </div>
             </div>
         );

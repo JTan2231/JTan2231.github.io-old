@@ -13,7 +13,7 @@ export class TextHighlight extends React.Component {
         this.fontHeight = parseInt(props.fontSize.substring(0, 2));
 
         var delta = 0.6;
-        this.totalCanvasWidth = this.text.length * this.fontHeight * delta + 13;
+        this.totalCanvasWidth = this.text.length * this.fontHeight * delta + 14;
         this.height = props.height;
         this.leftDefault = ((1-config.TEXT_RATIO)) * window.innerWidth;
         this.duration_seconds = 0.6;
@@ -145,6 +145,7 @@ export class TextHighlight extends React.Component {
 
     mouseEnter(e) {
         this.makeAccelPositive();
+        this.divText.current.dispatchEvent(new MouseEvent('mouseover'));
         this.setState({
             mouseIn: true,
             width: 0,
@@ -162,11 +163,13 @@ export class TextHighlight extends React.Component {
     }
 
     tick() {
-        if (this.state.mouseIn) {
-            this.animateRight();
-        }
-        else {
-            this.animateLeft();
+        if (this.backgroundCanvas.current) {
+            if (this.state.mouseIn) {
+                this.animateRight();
+            }
+            else {
+                this.animateLeft();
+            }
         }
     }
 
@@ -174,8 +177,8 @@ export class TextHighlight extends React.Component {
         const textStyle = { 'filler': null };
 
         return (
-            <div style={{ 'position': 'relative', 'height': 2 * this.fontHeight }} onMouseEnter={ this.mouseEnter.bind(this) } onMouseLeave={ this.mouseLeave.bind(this) }>
-                <canvas style={{ 'zIndex': 0, 'position': 'absolute', 'left': '2.32em' }} ref={ this.backgroundCanvas } width={ this.totalCanvasWidth } height={ 36 } />
+            <div class="textWrapper" style={{ 'height': 2 * this.fontHeight }} onMouseEnter={ this.mouseEnter.bind(this) } onMouseLeave={ this.mouseLeave.bind(this) }>
+                <canvas style={{ 'zIndex': 0, 'position': 'absolute', 'left': '-0.4em' }} ref={ this.backgroundCanvas } width={ this.totalCanvasWidth } height={ 36 } />
                 <div class="text" ref={ this.divText }>
                     { this.text }
                 </div>

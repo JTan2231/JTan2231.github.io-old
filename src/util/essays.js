@@ -1,5 +1,5 @@
 export const essays = {
-    "home.txt": [`A collection of essays, both finished and otherwise.`],
+    "home.txt": [`A collection of essays, both finished and otherwise. The above .txt files are various essays or random strings of thought I decided to write down. To see my technical frontend demonstrations, open library.`],
     "neural_mirrors.txt": [
         `A neural network, the family AI algorithms that run many modern recommendation and computer vision systems, is just a really good function approximator. It never gets the exact representation of the function – even nature can’t do that – but it often gets closer than any other methods we have come up with. This function could be that which determines what YouTube videos you would be most inclined to watch next. Its inputs would be what you have previously watched, and its outputs would be the videos that show up in your recommendation feed. Imagine a blurry image increasing in clarity as the function approaches a better approximation, or your increasing understanding as you get better at a certain skill.`,
         `Inputs are thrown into the function and transformed into whatever the outputs may be. This idea of functions representing transformations – your YouTube watch history (input) → your YouTube recommendation feed (output) – is immensely powerful because it can be used to model basically everything going on in the world, and the success of neural networks is representative of that idea. (Wittgenstein, Plato, theory of forms?)`,
@@ -26,4 +26,5 @@ export const essays = {
         `In a way this is similar to Heisenberg's Uncertainty Principle in quantum physics, which essentially means that the more preciesly we know a particle's position, the less precisely we know that same particle's momentum, and vice versa. Mapped to the context of our current discussion, I believe it means that [more topic precision takes away from generalizability, and vice versa? still not sure yet].`,
         `Is this generally useful? I have no idea. At the very least, it has given me the confidence to tackle basically any problem without fear of total failure. After all, it does imply that excellence in one field means the possibility of excellence in another. On the other hand, it could just be the abstract nonsense for which philosophers are most commonly hated. Regardless this is going to be something I will continue thinking about as I have found it most useful and would like to extract a more practical application for it.`,
     ],
+    "library": [``],
 };

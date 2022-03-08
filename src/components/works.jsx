@@ -1,10 +1,11 @@
 import React from 'react';
-import { essays } from '../util/test_text.js';
+import { essays } from '../util/essays.js';
 import { CommandLineInput } from './cmd_input.jsx';
 import { TextHighlight } from './text_highlight.jsx';
+import * as config from '../util/config.js';
 import '../stylesheets/writings.css';
 
-export class Writings extends React.Component {
+export class Works extends React.Component {
     constructor(props) {
         super(props);
 
@@ -23,6 +24,7 @@ export class Writings extends React.Component {
         this.canvasInterval = 30;
 
         this.small = props.small;
+        this.searchFocused = false;
 
         this.paragraphs = '';//this.generateParagraphs("Home");
 
@@ -54,6 +56,7 @@ export class Writings extends React.Component {
         if (this.state.displayChange !== prevProps.display) {
             if (!prevProps.display) {
                 this.display = 'none';
+                this.searchFocused = false;
             }
             else {
                 this.display = 'block';
@@ -61,6 +64,14 @@ export class Writings extends React.Component {
 
             this.setState({ displayChange: prevProps.display });
         }
+    }
+
+    getFontSize() {
+        if (this.small) {
+            return '12px';
+        }
+
+        return '18px';
     }
 
     addLineBreaks(p, amount) {
@@ -76,12 +87,38 @@ export class Writings extends React.Component {
         var paragraphs = [];
         paragraphs.push(<h1>{ essayName }</h1>);
 
+        if (essayName === 'library') {
+            const highlightTexts = [
+                'i expect most use cases to be around this size',
+                'but if not,',
+                `it shouldn't be a problem anyway`,
+                'considering this was designed to handle all single lines',
+                'long or short'
+            ];
+
+            paragraphs.push(<div><u>Text Highlighting:</u> Hover over a line</div>);
+            for (const text of highlightTexts) {
+                paragraphs.push(
+                    <TextHighlight fontSize={ this.getFontSize() }
+                                   totalWidth={ 0.4 * window.innerWidth }
+                                   text={ text } />
+                );
+            }
+
+            // other library elements ...
+
+            return paragraphs;
+        }
+
         for (var i = 0; i < essay.length; i++) {
             paragraphs.push(<p>{ essay[i] }</p>);
         }
 
-        if (essayName === "Home" && this.small) {
-            paragraphs.push(<p>Visit this website on a desktop for a better experience.</p>);
+        if (essayName === "home.txt") {
+            paragraphs.push(<div style={{ 'textIndent': '0' }}>Contact me at <a href="mailto:j.tan2231@gmail.com">j.tan2231@gmail.com</a>.</div>);
+            if (this.small) {
+                paragraphs.push(<p>Visit this website on a desktop for a better experience.</p>);
+            }
         }
 
         return paragraphs;
@@ -175,6 +212,7 @@ export class Writings extends React.Component {
             'marginRight': '-50px',
             'paddingRight': '50px',
             'overflowY': 'scroll',
+            'overflowX': 'hidden',
             'fontFamily': 'Courier New',
             'textIndent': '3.1em',
         };
@@ -190,6 +228,15 @@ export class Writings extends React.Component {
 
         const highlightLength = 0.4 * window.innerWidth;
 
+        if (this.display === 'block' && !this.searchFocused && this.cmdInput.current && this.cmdInput.current.cmdInput.current) {
+            setTimeout(function() {
+                if (this.cmdInput.current && this.cmdInput.current.cmdInput.current) {
+                    this.cmdInput.current.cmdInput.current.focus();
+                    this.searchFocused = true;
+                }
+            }.bind(this), config.TRANSITION_DELAY_SECONDS * 1000 * 2)
+        }
+
         return (
             <div style={{ 'display': this.display }}>
                 <div style={ writingStyle }>
@@ -201,21 +248,6 @@ export class Writings extends React.Component {
                         </table>
                         <div style={ essayStyle }>
                             <CommandLineInput ref={ this.cmdInput } search={ essays } />
-                            <TextHighlight fontSize={ essayFontSize }
-                                           totalWidth={ highlightLength }
-                                           text="small test" />
-                            <TextHighlight fontSize={ essayFontSize }
-                                           totalWidth={ highlightLength }
-                                           text="the medium test" />
-                            <TextHighlight fontSize={ essayFontSize }
-                                           totalWidth={ highlightLength }
-                                           text="this is the large test" />
-                            <TextHighlight fontSize={ essayFontSize }
-                                           totalWidth={ highlightLength }
-                                           text="this, this is the largest test" />
-                            <TextHighlight fontSize={ essayFontSize }
-                                           totalWidth={ highlightLength }
-                                           text="however, one may consider this to be the largest test" />
                             { this.paragraphs }
                         </div>
                     </div>

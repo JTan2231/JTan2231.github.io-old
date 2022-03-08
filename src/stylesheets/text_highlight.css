@@ -1,13 +1,20 @@
 .text {
     color: black;
-    transition: color 0.8s;
+    transition: color 0.4s;
 
+    text-indent: 0;
     position: absolute;
     top: 0%;
     background-color: rgba(255, 255, 255, 0.01);
     z-index: 1;
 }
 
-.text:hover {
+.textWrapper {
+    position: relative;
+    left: 3.1em;
+    text-indent: 0;
+}
+
+.textWrapper:hover > .text {
     color: white;
 }

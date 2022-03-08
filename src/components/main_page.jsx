@@ -5,7 +5,7 @@ import { backgroundText } from '../util/background_text.js';
 import PhysicsMenu from './menu_backdrop.jsx';
 import MenuSelections from './menu_selections.jsx';
 import { Transition } from './transition.jsx';
-import { Writings } from './writings.jsx';
+import { Works } from './works.jsx';
 
 class MainMenu extends React.Component {
     constructor(props) {
@@ -61,8 +61,8 @@ class MainMenu extends React.Component {
         return (
             <div>
                 <MenuSelections small={ smallScreen } />
-                <Transition ref={ this.transition } small={ smallScreen } text={ "Writings" } cont={ this.state.cont } totalWidth={ window.innerWidth * config.TEXT_RATIO } height={ window.innerHeight } />
-                <Writings display={ !rendering } small={ smallScreen } />
+                <Transition ref={ this.transition } small={ smallScreen } text={ "Works" } cont={ this.state.cont } totalWidth={ window.innerWidth * config.TEXT_RATIO } height={ window.innerHeight } />
+                <Works display={ !rendering } small={ smallScreen } />
                 <PhysicsMenu textIndex={ this.textIndex } rendering={ rendering } width={ this.width } height = { this.height } />
             </div>
         );
