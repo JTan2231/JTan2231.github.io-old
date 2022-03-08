@@ -242,15 +242,20 @@ class PhysicsMenu extends React.Component {
     }
 
     getTextUrl(idx) {
-        switch (idx) {
-          case 1:
-            return "https://en.wikipedia.org/wiki/The_Hobbit";
-          case 0:
-            return "https://en.wikipedia.org/wiki/Ulysses_(novel)";
-          case 2:
-            return "https://en.wikipedia.org/wiki/Finnegans_Wake";
-          default:
-            return "https://www.github.com/JTan2231/";
+        if (this.state.rendering) {
+            switch (idx) {
+              case 1:
+                return "https://en.wikipedia.org/wiki/The_Hobbit";
+              case 0:
+                return "https://en.wikipedia.org/wiki/Ulysses_(novel)";
+              case 2:
+                return "https://en.wikipedia.org/wiki/Finnegans_Wake";
+              default:
+                return "https://www.github.com/JTan2231/";
+            }
+        }
+        else {
+            return '';
         }
     }
 
@@ -320,17 +325,32 @@ class PhysicsMenu extends React.Component {
         const text = backgroundText[this.textIdx];
         const textUrl = this.getTextUrl(this.textIdx);
 
-        return (
-            <a href={ textUrl }>
-                <div style={ pageStyle }
-                     onMouseMove={ this.mouseMove.bind(this) }
-                     onMouseLeave={ this.mouseLeave.bind(this) }>
-                    <div style={ textStyle }>{ text }</div>
-                    <canvas style={ styles.backgroundStyle } ref={ this.backgroundCanvas } width={ this.canvasWidth } height={ this.height }/>
-                    <canvas style={ styles.circlesStyle } ref={ this.circleCanvas } width={ this.canvasWidth } height={ this.height }/>
+        if (this.state.rendering) {
+            return (
+                <a href={ textUrl }>
+                    <div style={ pageStyle }
+                         onMouseMove={ this.mouseMove.bind(this) }
+                         onMouseLeave={ this.mouseLeave.bind(this) }>
+                        <div style={ textStyle }>{ text }</div>
+                        <canvas style={ styles.backgroundStyle } ref={ this.backgroundCanvas } width={ this.canvasWidth } height={ this.height }/>
+                        <canvas style={ styles.circlesStyle } ref={ this.circleCanvas } width={ this.canvasWidth } height={ this.height }/>
+                    </div>
+                </a>
+            );
+        }
+        else {
+            return (
+                <div>
+                    <div style={ pageStyle }
+                         onMouseMove={ this.mouseMove.bind(this) }
+                         onMouseLeave={ this.mouseLeave.bind(this) }>
+                        <div style={ textStyle }>{ text }</div>
+                        <canvas style={ styles.backgroundStyle } ref={ this.backgroundCanvas } width={ this.canvasWidth } height={ this.height }/>
+                        <canvas style={ styles.circlesStyle } ref={ this.circleCanvas } width={ this.canvasWidth } height={ this.height }/>
+                    </div>
                 </div>
-            </a>
-        );
+            );
+        }
     }
 }
 

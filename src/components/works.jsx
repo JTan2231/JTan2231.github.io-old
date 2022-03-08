@@ -2,6 +2,7 @@ import React from 'react';
 import { essays } from '../util/essays.js';
 import { CommandLineInput } from './cmd_input.jsx';
 import { TextHighlight } from './text_highlight.jsx';
+import { TextDecode } from './text_decode.jsx';
 import * as config from '../util/config.js';
 import '../stylesheets/writings.css';
 
@@ -103,6 +104,42 @@ export class Works extends React.Component {
                                    totalWidth={ 0.4 * window.innerWidth }
                                    text={ text } />
                 );
+            }
+
+            paragraphs.push(<br />);
+
+            const decodeTexts = [
+                'i refer to this effect as text decoding',
+                'this is set up such that you can use',
+                `different 'amounts' of decoding`,
+                'e.g. this line has a lot of it going on',
+                `while this line doesn't have quite as much`,
+                'it can also use different types of encoding',
+                'consider only symbols (not letters)',
+                'or maybe only letters should be present',
+                'perhaps you may even want both in your decoding'
+            ];
+
+            paragraphs.push(<div><u>Text Decoding:</u> Hover over a line</div>);
+            for (const text of decodeTexts) {
+                if (text[0] === 'e') {
+                    paragraphs.push(<TextDecode text={ text } scrambleCount={ 10 } />);
+                }
+                else if (text[0] === 'w') {
+                    paragraphs.push(<TextDecode text={ text } scrambleCount={ 1 } />);
+                }
+                else if (text[0] === 'c') {
+                    paragraphs.push(<TextDecode text={ text } scrambleCount={ 6 } />);
+                }
+                else if (text[0] === 'o') {
+                    paragraphs.push(<TextDecode text={ text } scrambleCount={ 6 } useLetters={ true } />);
+                }
+                else if (text[0] === 'p') {
+                    paragraphs.push(<TextDecode text={ text } scrambleCount={ 6 } useBoth={ true }/>);
+                }
+                else {
+                    paragraphs.push(<TextDecode text={ text } />);
+                }
             }
 
             // other library elements ...
