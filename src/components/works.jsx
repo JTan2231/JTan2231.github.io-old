@@ -3,6 +3,7 @@ import { essays } from '../util/essays.js';
 import { CommandLineInput } from './cmd_input.jsx';
 import { TextHighlight } from './text_highlight.jsx';
 import { TextDecode } from './text_decode.jsx';
+import { Floaty } from './floaty.jsx';
 import * as config from '../util/config.js';
 import '../stylesheets/writings.css';
 
@@ -276,6 +277,7 @@ export class Works extends React.Component {
 
         return (
             <div style={{ 'display': this.display }}>
+                <Floaty radius={ 300 } root={ [window.innerWidth*0.3 + 200, 200] } text="whatever" />
                 <div style={ writingStyle }>
                     <div ref={ this.essayDiv } style={ childStyle }>
                         <table style={ titleStyle }>
