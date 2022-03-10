@@ -94,6 +94,7 @@ class PhysicsMenu extends React.Component {
 
         this.forceScalar = 1;
         this.textIdx = props.textIndex;
+        this.portfolio = props.portfolio;
 
         this.backgroundCanvas = React.createRef();
         this.circleCanvas = React.createRef();
@@ -106,8 +107,10 @@ class PhysicsMenu extends React.Component {
         if (this.height === 0)
             this.height = window.innerHeight;
 
-        this.canvasWidth = this.width * config.TEXT_RATIO;
-        this.leftOffset = this.width * (1-config.TEXT_RATIO);
+        this.tr = this.portfolio ? 1 : config.TEXT_RATIO;
+
+        this.canvasWidth = this.width * this.tr;
+        this.leftOffset = this.width * (1 - this.tr);
 
         this.timerID = setInterval(
             () => this.tick(), config.INTERVAL
@@ -306,9 +309,9 @@ class PhysicsMenu extends React.Component {
         const pageStyle = {
             'userSelect': 'none',
             'height': this.height,
-            'width': 100*config.TEXT_RATIO+'%',
+            'width': 100*this.tr+'%',
             'top': '0',
-            'left': 100*(1-config.TEXT_RATIO)+'%',
+            'left': 100*(1-this.tr)+'%',
             'position': 'absolute'
         }
 
@@ -319,13 +322,13 @@ class PhysicsMenu extends React.Component {
             'height': this.height,
             'top': '0px',
             'color': config.BACKGROUND_COLOR,
-            'fontFamily': 'verdana'
+            'fontFamily': 'monospace'
         };
 
         const text = backgroundText[this.textIdx];
         const textUrl = this.getTextUrl(this.textIdx);
 
-        if (this.state.rendering) {
+        if (this.state.rendering && !this.portfolio) {
             return (
                 <a href={ textUrl }>
                     <div style={ pageStyle }

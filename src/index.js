@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import MainMenu from './components/main_page.jsx';
+import { Portfolio } from './pages/portfolio.jsx';
+import { MainMenu } from './pages/main_page.jsx';
 
 ReactDOM.render(
   <React.StrictMode>
-    <MainMenu />
+    <Portfolio />
   </React.StrictMode>,
   document.getElementById('root')
 );

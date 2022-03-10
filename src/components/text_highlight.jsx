@@ -16,11 +16,14 @@ export class TextHighlight extends React.Component {
         this.totalCanvasWidth = this.text.length * this.fontHeight * delta + 14;
         this.height = props.height;
         this.leftDefault = ((1-config.TEXT_RATIO)) * window.innerWidth;
-        this.duration_seconds = 0.6;
+        this.duration_seconds = 0.9;
         this.duration = 60 * this.duration_seconds; // 60 fps -> 1 second total duration
         this.maxVel = (2*this.totalCanvasWidth) / this.duration;
         this.minVel = 0;
         this.baseAccel = (this.maxVel*this.maxVel) / (2*this.totalCanvasWidth)//(2*this.totalCanvasWidth)/(this.duration*this.duration);
+
+        this.textStyle = props.textStyle;
+        this.wrapperStyle = props.wrapperStyle;
 
         this.canvasWidth = 0;
         this.canvasHeight = 0;
@@ -44,7 +47,8 @@ export class TextHighlight extends React.Component {
             regressing: false,
             halfway: false,
             cont: props.cont,
-            rendering: true
+            rendering: true,
+            mouseIn: false
         };
     }
 
@@ -57,14 +61,27 @@ export class TextHighlight extends React.Component {
 
             this.canvasWidth = 1;//this.fontSize * this.divText.current.textContent.length;
             this.canvasHeight = 24;
-            console.log(this.divText.current.clientWidth);
             this.setState({ width: this.canvasWidth });
         }
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (this.state.cont !== prevProps.cont) {
-            this.setState({ cont: prevProps.cont });
+        if (prevProps.mouseIn !== undefined && this.state.mouseIn !== prevProps.mouseIn) {
+            if (prevProps.mouseIn === true) {
+                this.divText.current.dispatchEvent(new MouseEvent('mouseover'));
+                this.setState({
+                    mouseIn: true,
+                    width: 0,
+                    velocity: this.maxVel
+                });
+            }
+            else {
+                this.setState({
+                    mouseIn: false,
+                    width: this.totalCanvasWidth,
+                    velocity: this.maxVel
+                });
+            }
         }
     }
 
@@ -82,7 +99,7 @@ export class TextHighlight extends React.Component {
         var vel = this.state.velocity;
         var accel = this.state.acceleration;
 
-        vel = Math.max(this.totalCanvasWidth*this.duration_seconds/10, vel-accel);
+        vel = Math.max(3, vel-accel);
 
         var newWidth = width + vel;
         // we've made it to the end
@@ -110,7 +127,7 @@ export class TextHighlight extends React.Component {
         var vel = this.state.velocity;
         var accel = this.state.acceleration;
 
-        vel = Math.max(this.totalCanvasWidth*this.duration_seconds/10, vel-accel);
+        vel = Math.max(3, vel-accel);
 
         var newWidth = width - vel;
         // we've made it to the end
@@ -174,12 +191,24 @@ export class TextHighlight extends React.Component {
     }
 
     render() {
-        const textStyle = { 'filler': null };
+        var textStyle = { 'filler': null };
+        var textWrapperStyle = { ...{ 'height': 2*this.fontHeight} };
+
+        if (this.textStyle) {
+            textStyle = { ...textStyle, ...this.textStyle };
+        }
+
+        if (this.wrapperStyle) {
+            textWrapperStyle = { ...textWrapperStyle, ...this.wrapperStyle };
+            if (!textWrapperStyle.width) {
+                textWrapperStyle = { ...textWrapperStyle, ...{ 'width': this.totalCanvasWidth } };
+            }
+        }
 
         return (
-            <div class="textWrapper" style={{ 'height': 2 * this.fontHeight }} onMouseEnter={ this.mouseEnter.bind(this) } onMouseLeave={ this.mouseLeave.bind(this) }>
-                <canvas style={{ 'zIndex': 0, 'position': 'absolute', 'left': '-0.4em' }} ref={ this.backgroundCanvas } width={ this.totalCanvasWidth } height={ 36 } />
-                <div class="text" ref={ this.divText }>
+            <div class="textWrapper" style={ textWrapperStyle } onMouseEnter={ this.mouseEnter.bind(this) } onMouseLeave={ this.mouseLeave.bind(this) }>
+                <canvas style={{ 'zIndex': 50, 'position': 'absolute', 'left': '-0.4em' }} ref={ this.backgroundCanvas } width={ this.totalCanvasWidth } height={ 36 } />
+                <div class="text" style={ textStyle } ref={ this.divText }>
                     { this.text }
                 </div>
             </div>

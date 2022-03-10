@@ -277,7 +277,6 @@ export class Works extends React.Component {
 
         return (
             <div style={{ 'display': this.display }}>
-                <Floaty radius={ 300 } root={ [window.innerWidth*0.3 + 200, 200] } text="whatever" />
                 <div style={ writingStyle }>
                     <div ref={ this.essayDiv } style={ childStyle }>
                         <table style={ titleStyle }>

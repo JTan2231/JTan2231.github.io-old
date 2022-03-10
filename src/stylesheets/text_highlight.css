@@ -6,7 +6,7 @@
     position: absolute;
     top: 0%;
     background-color: rgba(255, 255, 255, 0.01);
-    z-index: 1;
+    z-index: 51;
 }
 
 .textWrapper {
@@ -17,4 +17,21 @@
 
 .textWrapper:hover > .text {
     color: white;
+}
+
+.extraWrapper {
+    text-indent: 0;
+}
+
+.extraWrapper:hover .text {
+    color: white;
+}
+
+.uncoverText {
+    color: white;
+    transition: color 0.8s;
+}
+
+.uncoverText:hover {
+    color: black;
 }

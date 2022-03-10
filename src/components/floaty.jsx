@@ -23,18 +23,18 @@ export class Floaty extends React.Component {
         var ry = proot[1];
 
         if ((rx + '').includes('%')) {
-            rx = window.innerWidth * Math.parseInt(rx.substring(0, -1)) / 100;
+            rx = window.innerWidth * parseFloat(rx.substring(0, rx.length-1)) / 100;
         }
 
         if ((ry + '').includes('%')) {
-            ry = window.innerWidth * Math.parseInt(ry.substring(0, -1)) / 100;
+            ry = window.innerWidth * parseFloat(ry.substring(0, ry.length-1)) / 100;
         }
 
         this.radius = props.radius;
         var r = props.root;
         this.proot = new vec2d.Vector2D([rx, ry]);
         this.root = new vec2d.Vector2D([rx+(this.width/2), ry+(this.height/2)]);
-        this.text = props.text;
+        this.elements = props.elements;
         this.lambda = 0.005;
 
         this.start = [0, 0];
@@ -63,14 +63,8 @@ export class Floaty extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.rendering !== this.state.rendering) {
-            if (prevProps.rendering === false) { 
-                const canvas = this.circleCanvas.current;
-                const context = canvas.getContext('2d');
-                context.clearRect(0, 0, this.width, this.height);
-            }
-
-            this.setState({ rendering: prevProps.rendering });
+        if (prevProps.highlightMouseIn !== undefined && prevProps.highlightMouseIn !== this.state.filler) {
+            this.setState({ filler: prevProps.highlightMouseIn });
         }
     }
 
@@ -86,64 +80,73 @@ export class Floaty extends React.Component {
         this.setState({ mouseIn: false });
     }
 
+    updatePosition(targetRoot, receding) {
+        var translatedCenter = targetRoot;
+
+        var current = new vec2d.Vector2D(this.state.currentPosition);
+        var travelVec = vec2d.subVec2D(translatedCenter, current);
+        var updateVec = vec2d.normalizeVec2DOut(travelVec);
+        var m = travelVec.magnitude() * this.lambda;
+
+        if (m === 0) {
+            return;
+        }
+
+        if (receding) {
+            m *= 5;
+        }
+
+        updateVec = vec2d.scalarMultVec2D(m*m, updateVec); // from gravity equation; assuming m1 == m2 == 1, no G, and r^2 instead of r^-2
+        current = vec2d.addVec2D(current, updateVec);
+
+        var translationVec = vec2d.subVec2D(current, this.root);
+        if (translationVec.magnitude() > this.radius) {
+            translationVec = vec2d.normalizeVec2DOut(translationVec);
+            translationVec = vec2d.scalarMultVec2D(this.radius, translationVec);
+        }
+
+        if (receding) {
+            if (translationVec.magnitude() < 1) {
+                translationVec.x = 0;
+                translationVec.y = 0;
+                current = this.root;
+            }
+        }
+
+        this.setState({ currentPosition: [current.x, current.y], transform: 'translate('+translationVec.x+'px, '+translationVec.y+'px)' });
+    }
+
     tick() {
         if (this.mounted) {
             if (this.state.mouseIn) {
-                var mouse = new vec2d.Vector2D([this.state.mouseX, this.state.mouseY]);
-                var translatedCenter = mouse;
-
-                var current = new vec2d.Vector2D(this.state.currentPosition);
-                var travelVec = vec2d.subVec2D(translatedCenter, current);
-                var updateVec = vec2d.normalizeVec2DOut(travelVec);
-                var m = travelVec.magnitude() * this.lambda;
-                updateVec = vec2d.scalarMultVec2D(m*m, updateVec); // from gravity equation; assuming m1 == m2 == 1, no G, and r^2 instead of r^-2
-
-                current = vec2d.addVec2D(current, updateVec);
-
-                var translationVec = vec2d.subVec2D(current, this.root);
-                if (translationVec.magnitude() > this.radius) {
-                    translationVec = vec2d.normalizeVec2DOut(translationVec);
-                    translationVec = vec2d.scalarMultVec2D(this.radius, translationVec);
-                }
-
-                this.setState({ currentPosition: [current.x, current.y], transform: 'translate('+translationVec.x+'px, '+translationVec.y+'px)' });
+                this.updatePosition(new vec2d.Vector2D([this.state.mouseX, this.state.mouseY]), false);
             }
             else {
-                var translatedCenter = this.root;
-
-                var current = new vec2d.Vector2D(this.state.currentPosition);
-                var travelVec = vec2d.subVec2D(translatedCenter, current);
-                var updateVec = vec2d.normalizeVec2DOut(travelVec);
-                var m = travelVec.magnitude() * this.lambda * 10;
-                if (m === 0) {
-                    return;
-                }
-                updateVec = vec2d.scalarMultVec2D(m*m, updateVec); // from gravity equation; assuming m1 == m2 == 1, no G, and r^2 instead of r^-2
-
-                current = vec2d.addVec2D(current, updateVec);
-
-                var translationVec = vec2d.subVec2D(current, this.root);
-
-                if (translationVec.magnitude() < 2) {
-                    translationVec.x = 0;
-                    translationVec.y = 0;
-                    current = this.root;
-                }
-
-                this.setState({ currentPosition: [current.x, current.y], transform: 'translate('+translationVec.x+'px, '+translationVec.y+'px)' });
+                this.updatePosition(this.root, true);
             }
         }
     }
 
     render() {
+        const style = {
+            'zIndex': 500,
+            'textAlign': 'center',
+            'width': this.width,
+            'height': this.height,
+            'left': this.proot.x,
+            'top': this.proot.y,
+            'position': 'absolute',
+            'transform': this.state.transform,
+            'border': '1px solid black',
+            'backgroundColor': 'white'
+        };
+
         return (
-            <div ref={ this.divRef } style={{ 'zIndex': 500, 'width': this.width, 'height': this.height, 'left': this.proot.x, 'top': this.proot.y, 'position': 'absolute', 'transform': this.state.transform }}
+            <div ref={ this.divRef } style={ style }
                  onMouseEnter={ this.mouseEnter.bind(this) }
                  onMouseLeave={ this.mouseLeave.bind(this) }
                  onMouseMove={ this.mouseMove.bind(this) }>
-                ||||||||||||||||||||| ||||||||||||||||| |||||||||||||||||||||||||| |||||||||||||||||||| ||||||||||||||||||||||||| ||||||||||||||||| |||||||||||||||||||||||||| |||||||||||||||||||| 
-|||||||||||||||||||| ||||||||||||||||| |||||||||||||||||||||||||| |||||||||||||||||||| 
-|||||||||||||||||||| ||||||||||||||||| |||||||||||||||||||||||||| |||||||||||||||||||| 
+                <div>{ this.elements }</div>
             </div>
         );
     }

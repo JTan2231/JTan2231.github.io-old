@@ -2,12 +2,12 @@ import React from 'react';
 import * as mathUtils from '../util/math_utils.js';
 import * as config from '../util/config.js';
 import { backgroundText } from '../util/background_text.js';
-import PhysicsMenu from './menu_backdrop.jsx';
-import MenuSelections from './menu_selections.jsx';
-import { Transition } from './transition.jsx';
-import { Works } from './works.jsx';
+import PhysicsMenu from '../components/menu_backdrop.jsx';
+import MenuSelections from '../components/menu_selections.jsx';
+import { Transition } from '../components/transition.jsx';
+import { Works } from '../components/works.jsx';
 
-class MainMenu extends React.Component {
+export class MainMenu extends React.Component {
     constructor(props) {
         super(props);
 
@@ -68,5 +68,3 @@ class MainMenu extends React.Component {
         );
     }
 }
-
-export default MainMenu;
