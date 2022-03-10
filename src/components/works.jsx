@@ -3,7 +3,6 @@ import { essays } from '../util/essays.js';
 import { CommandLineInput } from './cmd_input.jsx';
 import { TextHighlight } from './text_highlight.jsx';
 import { TextDecode } from './text_decode.jsx';
-import { Floaty } from './floaty.jsx';
 import * as config from '../util/config.js';
 import '../stylesheets/writings.css';
 
@@ -263,8 +262,6 @@ export class Works extends React.Component {
             'fontFamily': 'Courier New',
             'width': '100%',
         };
-
-        const highlightLength = 0.4 * window.innerWidth;
 
         if (this.display === 'block' && !this.searchFocused && this.cmdInput.current && this.cmdInput.current.cmdInput.current) {
             setTimeout(function() {

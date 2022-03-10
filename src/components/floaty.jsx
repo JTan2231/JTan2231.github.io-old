@@ -1,9 +1,6 @@
 import React from 'react';
 import * as vec2d from '../util/vec2d.js';
-import * as mathUtils from '../util/math_utils.js';
 import * as config from '../util/config.js';
-import { backgroundText } from '../util/background_text.js';
-import { styles } from '../util/menu_styles.js';
 
 export class Floaty extends React.Component {
     constructor(props) {
@@ -31,7 +28,6 @@ export class Floaty extends React.Component {
         }
 
         this.radius = props.radius;
-        var r = props.root;
         this.proot = new vec2d.Vector2D([rx, ry]);
         this.root = new vec2d.Vector2D([rx+(this.width/2), ry+(this.height/2)]);
         this.elements = props.elements;

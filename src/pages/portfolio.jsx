@@ -125,7 +125,7 @@ export class Portfolio extends React.Component {
                     <Floaty root={ ['49%', '6%'] } { ...allProps['depthPrediction']['floatyProps'] } elements= { [
                         <div style={{ 'fontFamily': 'monospace', 'fontSize': '16px', 'marginRight': '5%', 'marginLeft': '5%' }}>
                             <p>Graphics and interface developed by me using ReactJS</p>
-                            <p>Hover over project titles to see source code</p>
+                            <p>Click project titles to see source code</p>
                             <p>All projects open source</p>
                             <p>See my LinkedIn profile for work experience</p>
                         </div>

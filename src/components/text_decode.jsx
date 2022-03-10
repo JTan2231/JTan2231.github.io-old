@@ -1,6 +1,5 @@
 import React from 'react';
 import * as config from '../util/config.js';
-import { styles } from '../util/menu_styles.js';
 
 export class TextDecode extends React.Component {
     constructor(props) {
