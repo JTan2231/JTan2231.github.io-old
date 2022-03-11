@@ -5,6 +5,7 @@ import { backgroundText } from '../util/background_text.js';
 import PhysicsMenu from '../components/menu_backdrop.jsx';
 import { TextHighlight } from '../components/text_highlight.jsx';
 import { Floaty } from '../components/floaty.jsx';
+import { LoadingScreen } from '../components/loading_screen.jsx';
 
 export class Portfolio extends React.Component {
     constructor(props) {
@@ -74,6 +75,9 @@ export class Portfolio extends React.Component {
         return (
             <div>
                 <PhysicsMenu textIndex={ this.textIndex } rendering={ true } portfolio={ true } width={ this.width } height={ this.height } />
+                <div style={{ 'position': 'fixed', 'left': 0, 'top': 0, 'zIndex': 1000, 'fontFamily': 'monospace', 'fontSize': '12px', 'cursor': 'default' }}>
+                    <LoadingScreen height={ window.innerHeight } width={ window.innerWidth } />
+                </div>
 
                 <div>
                     <a href="mailto:j.tan2231@gmail.com" style={{ 'position': 'absolute' }}>
