@@ -82,10 +82,6 @@ export class Portfolio extends React.Component {
                 </div>
 
                 <div>
-                    <a href="mailto:j.tan2231@gmail.com" style={{ 'position': 'absolute' }}>
-                        <TextHighlight text="contact" { ...allProps['depthPrediction']['highlightProps'] }
-                                       wrapperStyle={{ 'top': window.innerHeight*0.0125 + 'px', 'left': window.innerWidth*0.225 + 'px' }} />
-                    </a>
                     <Floaty root={ ['10%', '3.5%'] } { ...allProps['depthPrediction']['floatyProps'] } height={ window.innerHeight*0.16 } elements= { [
                         <div style={{ 'fontFamily': 'monospace', 'fontSize': '16px', 'marginRight': '5%', 'marginLeft': '5%' }}>
                             <div>
@@ -109,48 +105,45 @@ export class Portfolio extends React.Component {
                 </div>
 
                 <div>
-                    <a href="https://github.com/JTan2231/ESN" style={{ 'position': 'absolute' }}>
-                        <TextHighlight text="echo state network" { ...allProps['depthPrediction']['highlightProps'] }
-                                       wrapperStyle={{ 'top': window.innerHeight*0.32 + 'px', 'left': window.innerWidth*0.21 + 'px' }} />
+                    <a href="https://github.com/JTan2231/ESN" style={{ 'textDecoration': 'none', 'color': 'black' }}>
+                        <Floaty root={ ['11.8%', '19.6%'] } { ...allProps['depthPrediction']['floatyProps'] } elements= { [
+                            <div style={{ 'fontFamily': 'monospace', 'fontSize': '16px', 'marginRight': '5%', 'marginLeft': '5%' }}>
+                                <p style={{ 'fontSize': '20px' }}>Echo State Network</p>
+                                <p>C implementation of an echo state network approximating a sine wave</p>
+                                <p>Developed from scratch, save for visualization</p>
+                                <p>Relevant linear algebra operations -- matrix inverse, eigenvalue calculations</p>
+                                <p>Sparse and dense matrix implementations</p>
+                            </div>
+                        ] } />
                     </a>
-                    <Floaty root={ ['11.8%', '19.6%'] } { ...allProps['depthPrediction']['floatyProps'] } elements= { [
-                        <div style={{ 'fontFamily': 'monospace', 'fontSize': '16px', 'marginRight': '5%', 'marginLeft': '5%' }}>
-                            <p>C implementation of an echo state network approximating a sine wave</p>
-                            <p>Developed from scratch, save for visualization</p>
-                            <p>Relevant linear algebra operations -- matrix inverse, eigenvalue calculations</p>
-                            <p>Sparse and dense matrix implementations</p>
-                        </div>
-                    ] } />
                 </div>
 
                 <div>
-                    <a href="https://github.com/JTan2231/JTan2231.github.io/tree/dev" style={{ 'position': 'absolute' }}>
-                        <TextHighlight text="this website" { ...allProps['depthPrediction']['highlightProps'] }
-                                       wrapperStyle={{ 'top': window.innerHeight*0.0605 + 'px', 'left': window.innerWidth*0.6 + 'px' }} />
+                    <a href="https://github.com/JTan2231/JTan2231.github.io/tree/dev" style={{ 'textDecoration': 'none', 'color': 'black' }}>
+                        <Floaty root={ ['49%', '6%'] } { ...allProps['depthPrediction']['floatyProps'] } elements= { [
+                            <div style={{ 'fontFamily': 'monospace', 'fontSize': '16px', 'marginRight': '5%', 'marginLeft': '5%' }}>
+                                <p style={{ 'fontSize': '20px' }}>This Website</p>
+                                <p><TextDecode text="Graphics and interface developed using ReactJS" /></p>
+                                <p><TextDecode text="Click project titles to see source code" /></p>
+                                <p><TextDecode text="All projects open source" /></p>
+                                <p><TextDecode text="See my LinkedIn profile for work experience" /></p>
+                            </div>
+                        ] } />
                     </a>
-                    <Floaty root={ ['49%', '6%'] } { ...allProps['depthPrediction']['floatyProps'] } elements= { [
-                        <div style={{ 'fontFamily': 'monospace', 'fontSize': '16px', 'marginRight': '5%', 'marginLeft': '5%' }}>
-                            <p><TextDecode text="Graphics and interface developed using ReactJS" /></p>
-                            <p><TextDecode text="Click project titles to see source code" /></p>
-                            <p><TextDecode text="All projects open source" /></p>
-                            <p><TextDecode text="See my LinkedIn profile for work experience" /></p>
-                        </div>
-                    ] } />
                 </div>
 
                 <div>
-                    <a href="https://github.com/JTan2231/depth-prediction" style={{ 'position': 'absolute' }}>
-                        <TextHighlight text="monocular depth prediction" { ...allProps['depthPrediction']['highlightProps'] }
-                                       wrapperStyle={{ 'top': window.innerHeight*0.52 + 'px', 'left': window.innerWidth*0.59 + 'px' }} />
+                    <a href="https://github.com/JTan2231/depth-prediction" style={{ 'textDecoration': 'none', 'color': 'black' }}>
+                        <Floaty root={ ['52%', '30%'] } { ...allProps['depthPrediction']['floatyProps'] } elements= { [
+                            <div style={{ 'fontFamily': 'monospace', 'fontSize': '16px', 'marginRight': '5%', 'marginLeft': '5%' }}>
+                                <p style={{ 'fontSize': '20px' }}>Monocular Depth Estimation</p>
+                                <p>Monocular depth and egomotion estimation neural network</p>
+                                <p>Implemented with python 3 and TensorFlow 2</p>
+                                <p>Completely unsupervised -- image-only input</p>
+                                <p>Pre-trained weights provided</p>
+                            </div>
+                        ] } />
                     </a>
-                    <Floaty root={ ['52%', '30%'] } { ...allProps['depthPrediction']['floatyProps'] } elements= { [
-                        <div style={{ 'fontFamily': 'monospace', 'fontSize': '16px', 'marginRight': '5%', 'marginLeft': '5%' }}>
-                            <p>Monocular depth and egomotion estimation neural network</p>
-                            <p>Implemented with python 3 and TensorFlow 2</p>
-                            <p>Completely unsupervised -- image-only input</p>
-                            <p>Pre-trained weights provided</p>
-                        </div>
-                    ] } />
                 </div>
             </div>
         );
