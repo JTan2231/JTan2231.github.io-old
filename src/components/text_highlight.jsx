@@ -98,7 +98,7 @@ export class TextHighlight extends React.Component {
         var vel = this.state.velocity;
         var accel = this.state.acceleration;
 
-        vel = Math.max(3, vel-accel);
+        vel = Math.max(1, vel-accel);
 
         var newWidth = width + vel;
         // we've made it to the end
@@ -126,7 +126,7 @@ export class TextHighlight extends React.Component {
         var vel = this.state.velocity;
         var accel = this.state.acceleration;
 
-        vel = Math.max(3, vel-accel);
+        vel = Math.max(1, vel-accel);
 
         var newWidth = width - vel;
         // we've made it to the end
@@ -207,7 +207,7 @@ export class TextHighlight extends React.Component {
         return (
             <div class="textWrapper" style={ textWrapperStyle } onMouseEnter={ this.mouseEnter.bind(this) } onMouseLeave={ this.mouseLeave.bind(this) }>
                 <canvas style={{ 'zIndex': 50, 'position': 'absolute', 'left': '-0.4em' }} ref={ this.backgroundCanvas } width={ this.totalCanvasWidth } height={ 36 } />
-                <div class="text" style={ textStyle } ref={ this.divText }>
+                <div class="text" style={{ ...textStyle, ...{ 'fontSize': this.fontSize } }}  ref={ this.divText }>
                     { this.text }
                 </div>
             </div>

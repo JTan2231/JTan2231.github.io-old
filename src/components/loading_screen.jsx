@@ -1,6 +1,5 @@
 import React from 'react';
 import * as config from '../util/config.js';
-import { MenuText } from '../util/menu_text.js';
 import { styles } from '../util/menu_styles.js';
 import '../stylesheets/loading_screen.css';
 
@@ -12,13 +11,13 @@ export class LoadingScreen extends React.Component {
         this.height = props.height;
         this.canvas = React.createRef();
 
-        var fadeSeconds = 0.6;
+        var fadeSeconds = 2;
         this.fadeFrameCount = fadeSeconds * 60;
 
         const alpha = 0.6;  // w
-        const beta = 0.025; // h
+        const beta = 0.02; // h
         const gamma = 0.2;  // l
-        const delta = 0.4;  // t
+        const delta = 0.45;  // t
 
         const wiw = window.innerWidth;
         const wih = window.innerHeight;
@@ -38,16 +37,16 @@ export class LoadingScreen extends React.Component {
 
         this.loadBarTextTop = wih * (delta - lambda * 1.5);
 
-        this.fadeBuffer = this.fadeFrameCount * 2;
+        this.fadeBuffer = this.fadeFrameCount;
 
         this.state = {
-            active: false,
+            active: true,
             backgroundDrawn: false,
             loadComplete: false,
-            fadeInComplete: false,
+            fadeInComplete: true,
             fadeOutComplete: false,
             currentBarWidth: 0,
-            fadeFrames: 0,
+            fadeFrames: this.fadeFrameCount,
             bufferCount: 0,
             loadBarBufferCount: 0,
             loadBarBuffer: 1
@@ -114,7 +113,8 @@ export class LoadingScreen extends React.Component {
     }
 
     getRandomFilename() {
-        return '/tmp/' + this.getRandomId(5) + '/' + this.getRandomId(7) + '/' + this.getRandomId(10) + '.jpg';
+        const ext = ['.js', '.jsx', '.html', '.css', '.jpg', '.svg'];
+        return '/home/joey/web/personal_build/' + this.getRandomId(this.getRandomInt(10)) + ext[this.getRandomInt(ext.length)];
     }
 
     drawLoadBar(width) {

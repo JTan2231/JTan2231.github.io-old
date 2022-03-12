@@ -1,4 +1,4 @@
-export const RADIUS_DEFAULT = 50;
+export const RADIUS_DEFAULT = 75;
 export const CURSOR_RADIUS = 15;
 export const INTERVAL = 1000/60; // 60 fps
 export const CIRCLE_COUNT = 5;
