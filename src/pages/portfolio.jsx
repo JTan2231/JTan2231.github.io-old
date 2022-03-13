@@ -5,6 +5,7 @@ import { backgroundText } from '../util/background_text.js';
 import PhysicsMenu from '../components/menu_backdrop.jsx';
 import { TextUnderline } from '../components/text_underline.jsx';
 import { TextDecode } from '../components/text_decode.jsx';
+import { TextFlip } from '../components/text_flip.jsx';
 import { Floaty } from '../components/floaty.jsx';
 import { LoadingScreen } from '../components/loading_screen.jsx';
 import '../stylesheets/portfolio.css';
@@ -145,10 +146,10 @@ export class Portfolio extends React.Component {
                                 <div style={{ 'width': '50%', 'margin': '5% auto', 'fontSize': '20px' }}>
                                     <TextUnderline text="Depth Estimation" bezier={ this.bezier } duration={ this.bDuration } />
                                 </div>
-                                <p>Monocular depth and egomotion estimation neural network</p>
-                                <p>Implemented with python 3 and TensorFlow 2</p>
-                                <p>Completely unsupervised -- image-only input</p>
-                                <p>Pre-trained weights provided</p>
+                                <p><TextFlip text="Monocular depth and egomotion estimation neural network" bezier={ this.bezier } duration={ this.bDuration } /></p>
+                                <p><TextFlip text="Implemented with python 3 and TensorFlow 2" bezier={ this.bezier } duration={ this.bDuration } /></p>
+                                <p><TextFlip text="Completely unsupervised -- image-only input" bezier={ this.bezier } duration={ this.bDuration } /></p>
+                                <p><TextFlip text="Pre-trained weights provided" bezier={ this.bezier } duration={ this.bDuration } /></p>
                             </div>
                         ] } />
                     </a>
