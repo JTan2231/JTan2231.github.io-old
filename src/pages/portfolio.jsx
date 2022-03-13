@@ -3,7 +3,7 @@ import * as mathUtils from '../util/math_utils.js';
 import * as config from '../util/config.js';
 import { backgroundText } from '../util/background_text.js';
 import PhysicsMenu from '../components/menu_backdrop.jsx';
-import { TextHighlight } from '../components/text_highlight.jsx';
+import { TextUnderline } from '../components/text_underline.jsx';
 import { TextDecode } from '../components/text_decode.jsx';
 import { Floaty } from '../components/floaty.jsx';
 import { LoadingScreen } from '../components/loading_screen.jsx';
@@ -23,6 +23,8 @@ export class Portfolio extends React.Component {
         }
 
         this.textIndex = mathUtils.randomInt(backgroundText.length);
+        this.bezier = [0.8, 0.2, 0.3, 0.9];
+        this.bDuration = 0.4;
 
         this.state = {
             transition: 0,
@@ -108,7 +110,9 @@ export class Portfolio extends React.Component {
                     <a href="https://github.com/JTan2231/ESN" style={{ 'textDecoration': 'none', 'color': 'black' }}>
                         <Floaty root={ ['11.8%', '19.6%'] } { ...allProps['depthPrediction']['floatyProps'] } elements= { [
                             <div style={{ 'fontFamily': 'monospace', 'fontSize': '16px', 'marginRight': '5%', 'marginLeft': '5%' }}>
-                                <p style={{ 'fontSize': '20px' }}>Echo State Network</p>
+                                <div style={{ 'width': '50%', 'margin': '5% auto', 'fontSize': '20px' }}>
+                                    <TextUnderline text="Echo State Network" bezier={ this.bezier } duration={ this.bDuration } />
+                                </div>
                                 <p>C implementation of an echo state network approximating a sine wave</p>
                                 <p>Developed from scratch, save for visualization</p>
                                 <p>Relevant linear algebra operations -- matrix inverse, eigenvalue calculations</p>
@@ -122,7 +126,9 @@ export class Portfolio extends React.Component {
                     <a href="https://github.com/JTan2231/JTan2231.github.io/tree/dev" style={{ 'textDecoration': 'none', 'color': 'black' }}>
                         <Floaty root={ ['49%', '6%'] } { ...allProps['depthPrediction']['floatyProps'] } elements= { [
                             <div style={{ 'fontFamily': 'monospace', 'fontSize': '16px', 'marginRight': '5%', 'marginLeft': '5%' }}>
-                                <p style={{ 'fontSize': '20px' }}>This Website</p>
+                                <div style={{ 'width': '50%', 'margin': '5% auto', 'fontSize': '20px' }}>
+                                    <TextUnderline text="This Website" bezier={ this.bezier } duration={ this.bDuration } />
+                                </div>
                                 <p><TextDecode text="Graphics and interface developed using ReactJS" /></p>
                                 <p><TextDecode text="Click project titles to see source code" /></p>
                                 <p><TextDecode text="All projects open source" /></p>
@@ -136,7 +142,9 @@ export class Portfolio extends React.Component {
                     <a href="https://github.com/JTan2231/depth-prediction" style={{ 'textDecoration': 'none', 'color': 'black' }}>
                         <Floaty root={ ['52%', '30%'] } { ...allProps['depthPrediction']['floatyProps'] } elements= { [
                             <div style={{ 'fontFamily': 'monospace', 'fontSize': '16px', 'marginRight': '5%', 'marginLeft': '5%' }}>
-                                <p style={{ 'fontSize': '20px' }}>Monocular Depth Estimation</p>
+                                <div style={{ 'width': '50%', 'margin': '5% auto', 'fontSize': '20px' }}>
+                                    <TextUnderline text="Depth Estimation" bezier={ this.bezier } duration={ this.bDuration } />
+                                </div>
                                 <p>Monocular depth and egomotion estimation neural network</p>
                                 <p>Implemented with python 3 and TensorFlow 2</p>
                                 <p>Completely unsupervised -- image-only input</p>

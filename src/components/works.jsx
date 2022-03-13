@@ -1,7 +1,6 @@
 import React from 'react';
 import { essays } from '../util/essays.js';
 import { CommandLineInput } from './cmd_input.jsx';
-import { TextHighlight } from './text_highlight.jsx';
 import { TextDecode } from './text_decode.jsx';
 import * as config from '../util/config.js';
 import '../stylesheets/writings.css';
@@ -97,7 +96,7 @@ export class Works extends React.Component {
                 'long or short'
             ];
 
-            paragraphs.push(<div><u>Text Highlighting:</u> Hover over a line</div>);
+            /*paragraphs.push(<div><u>Text Highlighting:</u> Hover over a line</div>);
             for (const text of highlightTexts) {
                 paragraphs.push(
                     <TextHighlight fontSize={ this.getFontSize() }
@@ -106,7 +105,7 @@ export class Works extends React.Component {
                 );
             }
 
-            paragraphs.push(<br />);
+            paragraphs.push(<br />);*/
 
             const decodeTexts = [
                 'i refer to this effect as text decoding',
