@@ -6,30 +6,13 @@ export class Floaty extends React.Component {
     constructor(props) {
         super(props);
 
-        if (!props.width || !props.height) {
-            this.width = 320;
-            this.height = 160;
-        }
-        else {
-            this.width = props.width;
-            this.height = props.height;
-        }
-
         var proot = props.root;
         var rx = proot[0];
         var ry = proot[1];
 
-        if ((rx + '').includes('%')) {
-            rx = window.innerWidth * parseFloat(rx.substring(0, rx.length-1)) / 100;
-        }
-
-        if ((ry + '').includes('%')) {
-            ry = window.innerWidth * parseFloat(ry.substring(0, ry.length-1)) / 100;
-        }
-
         this.radius = props.radius;
-        this.proot = new vec2d.Vector2D([rx, ry]);
-        this.root = new vec2d.Vector2D([rx+(this.width/2), ry+(this.height/2)]);
+        this.proot = [rx, ry];
+        this.root = [];
         this.elements = props.elements;
         this.lambda = 0.005;
 
@@ -55,7 +38,15 @@ export class Floaty extends React.Component {
             () => this.tick(), config.INTERVAL
         );
 
-        this.setState({ currentPosition: [this.root.x, this.root.y] });
+        if (this.divRef.current) {
+            const rect = this.divRef.current.getBoundingClientRect();
+            this.width = rect.right - rect.left;
+            this.height = rect.bottom - rect.top;
+
+            this.root = new vec2d.Vector2D([(rect.left+rect.right) / 2, (rect.top+rect.bottom) / 2]);
+
+            this.setState({ currentPosition: [this.root.x, this.root.y] });
+        }
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -114,6 +105,7 @@ export class Floaty extends React.Component {
 
     tick() {
         if (this.mounted) {
+
             if (this.state.mouseIn) {
                 this.updatePosition(new vec2d.Vector2D([this.state.mouseX, this.state.mouseY]), false);
             }
@@ -129,8 +121,8 @@ export class Floaty extends React.Component {
             'textAlign': 'center',
             'width': this.width,
             'height': this.height,
-            'left': this.proot.x,
-            'top': this.proot.y,
+            'left': this.proot[0],
+            'top': this.proot[1],
             'position': 'absolute',
             'transform': this.state.transform,
             'border': '1px solid black',

@@ -37,7 +37,7 @@ export class Portfolio extends React.Component {
         this.transition = React.createRef();
     }
 
-    tick() {
+    /*tick() {
         this.setState({ rendering: true });
     }
 
@@ -48,7 +48,7 @@ export class Portfolio extends React.Component {
                 () => this.tick(), config.INTERVAL
             );
         }
-    }
+    }*/
 
     render() {
         const allProps = {
@@ -72,7 +72,7 @@ export class Portfolio extends React.Component {
                 'floatyProps': {
                     'radius': 50,
                     'width': window.innerWidth * 0.3,
-                    'height': window.innerHeight * 0.3,
+                    'height': window.innerHeight * 0.05,
                 }
             }
         }
@@ -86,7 +86,7 @@ export class Portfolio extends React.Component {
 
                 <div>
                     <Floaty root={ ['10%', '3.5%'] } { ...allProps['depthPrediction']['floatyProps'] } height={ window.innerHeight*0.16 } elements= { [
-                        <div style={{ 'fontFamily': 'monospace', 'fontSize': '16px', 'marginRight': '5%', 'marginLeft': '5%' }}>
+                        <div style={{ 'fontFamily': 'monospace', 'fontSize': '16px', 'margin': '0 auto', 'minWidth': 240 }}>
                             <div>
                                 <p>
                                     <a href="mailto:j.tan2231@gmail.com">
@@ -109,8 +109,8 @@ export class Portfolio extends React.Component {
 
                 <div>
                     <a href="https://github.com/JTan2231/ESN" style={{ 'textDecoration': 'none', 'color': 'black' }}>
-                        <Floaty root={ ['11.8%', '19.6%'] } { ...allProps['depthPrediction']['floatyProps'] } elements= { [
-                            <div style={{ 'fontFamily': 'monospace', 'fontSize': '16px', 'marginRight': '5%', 'marginLeft': '5%' }}>
+                        <Floaty root={ ['11.8%', '35.6%'] } { ...allProps['depthPrediction']['floatyProps'] } height={ 36*6+'px' } elements= { [
+                            <div style={{ 'fontFamily': 'monospace', 'fontSize': '16px', 'marginRight': '5%', 'marginLeft': '5%', 'maxWidth': 480 }}>
                                 <div style={{ 'width': '50%', 'margin': '5% auto', 'fontSize': '20px' }}>
                                     <TextUnderline text="Echo State Network" bezier={ this.bezier } duration={ this.bDuration } />
                                 </div>
@@ -141,7 +141,7 @@ export class Portfolio extends React.Component {
 
                 <div>
                     <a href="https://github.com/JTan2231/depth-prediction" style={{ 'textDecoration': 'none', 'color': 'black' }}>
-                        <Floaty root={ ['52%', '30%'] } { ...allProps['depthPrediction']['floatyProps'] } elements= { [
+                        <Floaty root={ ['52%', '60%'] } { ...allProps['depthPrediction']['floatyProps'] } elements= { [
                             <div style={{ 'fontFamily': 'monospace', 'fontSize': '16px', 'marginRight': '5%', 'marginLeft': '5%' }}>
                                 <div style={{ 'width': '50%', 'margin': '5% auto', 'fontSize': '20px' }}>
                                     <TextUnderline text="Depth Estimation" bezier={ this.bezier } duration={ this.bDuration } />
