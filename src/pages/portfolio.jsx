@@ -6,6 +6,7 @@ import PhysicsMenu from '../components/menu_backdrop.jsx';
 import { TextUnderline } from '../components/text_underline.jsx';
 import { TextDecode } from '../components/text_decode.jsx';
 import { TextFlip } from '../components/text_flip.jsx';
+import { TextSlide } from '../components/text_slide.jsx';
 import { Floaty } from '../components/floaty.jsx';
 import { LoadingScreen } from '../components/loading_screen.jsx';
 import '../stylesheets/portfolio.css';
@@ -25,6 +26,7 @@ export class Portfolio extends React.Component {
 
         this.textIndex = mathUtils.randomInt(backgroundText.length);
         this.bezier = [0.8, 0.2, 0.3, 0.9];
+        this.slideBezier = [0.8, 0.2, 0.3, 1.5];
         this.bDuration = 0.4;
 
         this.state = {
@@ -77,13 +79,15 @@ export class Portfolio extends React.Component {
             }
         }
 
+        const loadingScreen = (
+            <div style={{ 'position': 'fixed', 'left': 0, 'top': 0, 'zIndex': 1000, 'fontFamily': 'monospace', 'fontSize': '12px', 'cursor': 'default' }}>
+                <LoadingScreen height={ window.innerHeight } width={ window.innerWidth } />
+            </div>
+        );
+
         return (
             <div>
                 <PhysicsMenu textIndex={ this.textIndex } rendering={ true } portfolio={ true } width={ this.width } height={ this.height } />
-                <div style={{ 'position': 'fixed', 'left': 0, 'top': 0, 'zIndex': 1000, 'fontFamily': 'monospace', 'fontSize': '12px', 'cursor': 'default' }}>
-                    <LoadingScreen height={ window.innerHeight } width={ window.innerWidth } />
-                </div>
-
                 <div>
                     <Floaty root={ ['10%', '3.5%'] } { ...allProps['depthPrediction']['floatyProps'] } height={ window.innerHeight*0.16 } elements= { [
                         <div style={{ 'fontFamily': 'monospace', 'fontSize': '16px', 'margin': '0 auto', 'minWidth': 240 }}>
@@ -114,10 +118,10 @@ export class Portfolio extends React.Component {
                                 <div style={{ 'width': '50%', 'margin': '5% auto', 'fontSize': '20px' }}>
                                     <TextUnderline text="Echo State Network" bezier={ this.bezier } duration={ this.bDuration } />
                                 </div>
-                                <p>C implementation of an echo state network approximating a sine wave</p>
-                                <p>Developed from scratch, save for visualization</p>
-                                <p>Relevant linear algebra operations -- matrix inverse, eigenvalue calculations</p>
-                                <p>Sparse and dense matrix implementations</p>
+                                <p><TextSlide text="C implementation of an echo state network" bezier={ this.slideBezier } duration={ this.bDuration } /></p>
+                                <p><TextSlide text="Developed from scratch, no libraries" bezier={ this.slideBezier } duration={ this.bDuration } /></p>
+                                <p><TextSlide text="Relevant linear algebra operations -- matrix inverse, eigenvalue calculations" bezier={ this.slideBezier } duration={ this.bDuration } /></p>
+                                <p><TextSlide text="Sparse and dense matrix implementations" bezier={ this.slideBezier } duration={ this.bDuration } /></p>
                             </div>
                         ] } />
                     </a>

@@ -105,7 +105,6 @@ export class Floaty extends React.Component {
 
     tick() {
         if (this.mounted) {
-
             if (this.state.mouseIn) {
                 this.updatePosition(new vec2d.Vector2D([this.state.mouseX, this.state.mouseY]), false);
             }
