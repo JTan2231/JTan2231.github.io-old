@@ -1,0 +1,2 @@
+.loadingScreen,.textWrapper,.textWrapper:focus .loadingScreen{opacity:1}.bezier{position:relative;width:-webkit-fit-content;width:-moz-fit-content;width:fit-content}.bezier:after{content:"";position:absolute;border-bottom:1px solid #000;bottom:0;transition:.5s cubic-bezier(.65,.05,.36,1)}.bezier:hover:after{left:0;width:100%;-webkit-transform:scaleX(0);transform:scaleX(0)}
+/*# sourceMappingURL=main.d115ef23.chunk.css.map */
