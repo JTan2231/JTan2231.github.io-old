@@ -220,8 +220,7 @@ export class LoadingScreen extends React.Component {
         };
 
         return (
-            <div class="textWrapper" onClick={ this.onClick.bind(this) }>
-                click me
+            <div class="textWrapper">
                 <canvas class="loadingScreen" style={ canvasStyle } ref={ this.canvas } width={ this.width } height={ this.height } />
             </div>
         );

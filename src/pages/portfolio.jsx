@@ -88,6 +88,7 @@ export class Portfolio extends React.Component {
         return (
             <div>
                 <PhysicsMenu textIndex={ this.textIndex } rendering={ true } portfolio={ true } width={ this.width } height={ this.height } />
+                { loadingScreen }
                 <div>
                     <Floaty root={ ['10%', '3.5%'] } { ...allProps['depthPrediction']['floatyProps'] } height={ window.innerHeight*0.16 } elements= { [
                         <div style={{ 'fontFamily': 'monospace', 'fontSize': '16px', 'margin': '0 auto', 'minWidth': 240 }}>
