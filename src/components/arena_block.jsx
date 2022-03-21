@@ -49,7 +49,8 @@ export class ArenaBlock extends React.Component {
             backgroundColor: 'white',
             width: w,
             height: h,
-            display: 'flex'
+            display: 'flex',
+            overflow: 'hidden'
         };
 
         const outlineStyle = {
@@ -83,12 +84,32 @@ export class ArenaBlock extends React.Component {
             transition: 'all 0.3s'
         };
 
-        return (
-            <div ref={ this.divRef } style={ style } onMouseEnter={ this.mouseEnter.bind(this) } onMouseLeave={ this.mouseLeave.bind(this) }>
-                <span style={ whiteStyle } />
-                <img { ...imgProps } width={ this.props.imageWidth } height={ this.props.imageWidth } />
-                <span style={ outlineStyle } />
-            </div>
-        );
+        const textStyle = {
+            margin: 'auto',
+            zIndex: 6,
+            transform: this.state.mouseIn ? 'scale(0.97, 0.97)' : '',
+            transition: 'all 0.3s',
+            color: 'black',
+            overflow: 'hidden'
+        };
+
+        if (this.props.src) {
+            return (
+                <div ref={ this.divRef } style={ style } onMouseEnter={ this.mouseEnter.bind(this) } onMouseLeave={ this.mouseLeave.bind(this) }>
+                    <span style={ whiteStyle } />
+                    <img { ...imgProps } width={ this.props.imageWidth } />
+                    <span style={ outlineStyle } />
+                </div>
+            );
+        }
+        else {
+            return (
+                <div ref={ this.divRef } style={ style } onMouseEnter={ this.mouseEnter.bind(this) } onMouseLeave={ this.mouseLeave.bind(this) }>
+                    <span style={ whiteStyle } />
+                    <span style={ textStyle } dangerouslySetInnerHTML={{ __html: this.props.elementString }} />
+                    <span style={ outlineStyle } />
+                </div>
+            );
+        }
     }
 }

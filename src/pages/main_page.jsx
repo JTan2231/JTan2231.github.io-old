@@ -3,6 +3,7 @@ import * as mathUtils from '../util/math_utils.js';
 import * as config from '../util/config.js';
 import { Portfolio } from './portfolio.jsx';
 import { Playground } from './playground.jsx';
+import { TextHighlight } from '../components/text_highlight.jsx';
 
 export class MainMenu extends React.Component {
     constructor(props) {
@@ -32,14 +33,14 @@ export class MainMenu extends React.Component {
         if (this.state.portfolio) {
             div = (
                 <div style={ buttonStyle } onClick={ this.mouseClick.bind(this) }>
-                    are.na
+                    <TextHighlight text="are.na" duration={ 0.3 } />
                 </div>
             );
         }
         else {
             div = (
                 <div style={ buttonStyle } onClick={ this.mouseClick.bind(this) }>
-                    portfolio&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a collection of images i like
+                    <TextHighlight text="portfolio" duration={ 0.3 } />
                 </div>
             );
         }
