@@ -25,7 +25,6 @@ export class Playground extends React.Component {
             var content = {
                 shapes: {
                     images: [],
-                    ids: [],
                 },
                 thoughts: {
                     images: [],
@@ -39,32 +38,29 @@ export class Playground extends React.Component {
 
             for (const im of shapes.contents) {
                 if (im.image) {
-                    content.shapes.images.push(im.image.display.url);
-                    content.shapes.ids.push(im.id);
+                    content.shapes.images.push({ image: im.image.display.url, id: im.id });
                 }
             }
 
             for (const im of thoughts.contents) {
                 if (im.image) {
-                    content.thoughts.images.push(im.image.display.url);
+                    content.thoughts.images.push({ image: im.image.display.url, id: im.id });
                 }
                 else if (im.content && im.content.length > 0) {
-                    content.thoughts.texts.push(im.content);
+                    content.thoughts.texts.push({ text: im.content, id: im.id });
                 }
-
-                content.thoughts.ids.push(im.id);
             }
 
             var t = false;
             var displayContent = [];
             for (var i = 0; i < Math.min(content.shapes.images.length, content.thoughts.images.length + content.thoughts.texts.length); i++) {
-                displayContent.push({ image: content.shapes.images[i] });
+                displayContent.push(content.shapes.images[i]);
 
-                if (t) {
-                    displayContent.push({ text: content.thoughts.texts[i] });
+                if (t && i < content.thoughts.texts.length) {
+                    displayContent.push(content.thoughts.texts[i]);
                 }
-                else {
-                    displayContent.push({ image: content.thoughts.images[i] });
+                else if (!t && i < content.thoughts.images.length) {
+                    displayContent.push(content.thoughts.images[i]);
                 }
 
                 t = !t;
