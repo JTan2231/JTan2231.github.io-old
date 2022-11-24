@@ -1,19 +1,10 @@
 {
   "files": {
-<<<<<<< HEAD
     "main.js": "/static/js/main.da0162bf.js",
     "index.html": "/index.html",
     "main.da0162bf.js.map": "/static/js/main.da0162bf.js.map"
   },
   "entrypoints": [
     "static/js/main.da0162bf.js"
-=======
-    "main.js": "/static/js/main.b5a72112.js",
-    "index.html": "/index.html",
-    "main.b5a72112.js.map": "/static/js/main.b5a72112.js.map"
-  },
-  "entrypoints": [
-    "static/js/main.b5a72112.js"
->>>>>>> f1e3e87c8cf16d21001cef0352a2693ced7bab54
   ]
 }
