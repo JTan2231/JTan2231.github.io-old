@@ -5,11 +5,15 @@ import Project from "./Project.vue";
 
 <template>
     <PageItem>
-        <template #heading>Testing</template>
+        <template #heading>Joey Tan</template>
 
-        <template #p1>Graduating May 2023.</template>
+        <template #p1>
+            <a href="mailto:j.tan2231@gmail.com">j.tan2231@gmail.com</a> | 
+            <a href="https://linkedin.com/in/joseph-tan-478aa5186">LinkedIn</a> |
+            <a href="https://jtan2231.github.io">CV</a>
+        </template>
         <template #p2>
-            Interested in building tools for tomorrow.
+            Interested in making tomorrow easier.
         </template>
     </PageItem>
 
@@ -18,7 +22,9 @@ import Project from "./Project.vue";
 
         <template #p1>
             <Project>
-                <template #projectName>AINote</template>
+                <template #projectName>
+                    <a href="https://github.com/JTan2231/ainote">AINote</a>
+                </template>
 
                 <template #tooling>
                     Frictionless notetaking with deep learning.
@@ -30,14 +36,16 @@ import Project from "./Project.vue";
             </Project>
 
             <Project>
-                <template #projectName>Depth Estimation</template>
+                <template #projectName>
+                    <a href="https://github.com/JTan2231/depth-estimation">Depth Estimation</a>
+                </template>
 
                 <template #tooling>
                     Unsupervised monocular depth and egomotion estimation with deep learning.
                 </template>
 
                 <template #description>
-                    TensorFlow 2.0 implementation of some of the latest methods in unsupervised depth estimation with a CNN. Trains using only monocular video. { TODO: Turn this into a camera filter? }
+                    TensorFlow 2.0 implementation of some of the latest methods in unsupervised depth estimation with a CNN. Trains using only monocular video. { TODO: Turn this into a camera filter? } { TODO: Check link }
                 </template>
             </Project>
                     
@@ -46,10 +54,15 @@ import Project from "./Project.vue";
 
     <div style="top: -3rem;">
         <PageItem>
-            <template #heading>TODO</template>
+            <template #heading>Writings</template>
 
-            <template #p1>Add projects and writings to the website</template>
-            <template #p2>Clean up source code</template>
+            <template #p1>In progress.</template>
         </PageItem>
     </div>
 </template>
+
+<style scoped>
+a {    
+    color: hsl(228, 32.5%, 40.2%);
+}
+</style>

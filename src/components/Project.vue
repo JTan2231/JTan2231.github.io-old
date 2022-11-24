@@ -21,7 +21,6 @@
 .header {
     display: flex;
     width: fit-content;
-    padding-bottom: 0.5rem;
 }
 
 .name {
