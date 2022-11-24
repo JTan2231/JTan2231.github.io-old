@@ -29,6 +29,7 @@
     line-height: 2rem;
     display: flex;
     color: hsl(228, 32.5%, 30.2%);
+    height: fit-content;
 }
 
 .tooling {
