@@ -23,7 +23,7 @@ import Project from "./Project.vue";
         <template #p1>
             <Project>
                 <template #projectName>
-                    <a href="https://github.com/JTan2231/ainote">AINote</a>
+                    <a href="https://joeytan.dev/" target="_blank" rel="noopener noreferrer">AINote</a>
                 </template>
 
                 <template #tooling>
