@@ -31,13 +31,13 @@ import Project from "./Project.vue";
                 </template>
 
                 <template #description>
-                    Self-organizing notetaking web app designed to make notetaking and organization as simple as possible. { TODO: What else does it do? }
+                    Self-organizing notetaking web app designed to make notetaking and organization as simple as possible. Exploring connections between disparate bits of information.
                 </template>
             </Project>
 
             <Project>
                 <template #projectName>
-                    <a href="https://github.com/JTan2231/depth-estimation">Depth Estimation</a>
+                    <a href="https://github.com/JTan2231/depth-prediction/" target="_blank" rel="noopener noreferrer">Depth Estimation</a>
                 </template>
 
                 <template #tooling>
@@ -45,7 +45,7 @@ import Project from "./Project.vue";
                 </template>
 
                 <template #description>
-                    TensorFlow 2.0 implementation of some of the latest methods in unsupervised depth estimation with a CNN. Trains using only monocular video. { TODO: Turn this into a camera filter? } { TODO: Check link }
+                    TensorFlow 2.0 implementation of some of the latest methods in unsupervised depth estimation with a CNN. Requires only monocular RGB video as training data. Weights provided.
                 </template>
             </Project>
                     
