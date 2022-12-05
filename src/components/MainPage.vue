@@ -9,11 +9,30 @@ import Project from "./Project.vue";
 
         <template #p1>
             <a href="mailto:j.tan2231@gmail.com">j.tan2231@gmail.com</a> | 
-            <a href="https://linkedin.com/in/joseph-tan-478aa5186">LinkedIn</a> |
-            <a href="https://jtan2231.github.io">CV</a>
+            <a href="https://linkedin.com/in/joseph-tan-478aa5186">linkedIn</a> |
+            <a href="https://github.com/JTan2231">github</a> |
+            <a href="https://jtan2231.github.io">cv</a>
         </template>
         <template #p2>
             Interested in making tomorrow easier.
+            <br />
+            Currently:
+            <ul>
+                <li>Working on <a href="https://joeytan.dev/" target="_blank" rel="noopener noreferrer">AINote</a> (including naming)</li>
+                <li>Reading:
+                    <ul>
+                        <li>
+                            <a href="https://www.amazon.com/Ancient-Greek-Athletics-Stephen-Miller/dp/0300115296" target="_blank" rel="noopener noreferrer">
+                                Ancient Greek Athletics
+                            </a> by Stephen Miller
+                        </li>
+                        <li>
+                            <a href="https://thenetworkstate.com/" target="_blank" rel="noopener noreferrer">The Network State</a> by Balaji Srinivasan
+                        </li>
+                    </ul>
+                </li>
+                <li>Learning <a href="https://youtu.be/HI1ZlEdWWJg" target="_blank" rel="noopener noreferrer">how to skate like this</a></li>
+            </ul>
         </template>
     </PageItem>
 
@@ -60,9 +79,3 @@ import Project from "./Project.vue";
         </PageItem>
     </div>
 </template>
-
-<style scoped>
-a {    
-    color: hsl(228, 32.5%, 40.2%);
-}
-</style>
