@@ -18,7 +18,7 @@ import Project from "./Project.vue";
             <br />
             Currently:
             <ul>
-                <li>Working on <a href="https://joeytan.dev/" target="_blank" rel="noopener noreferrer">AINote</a> (including naming)</li>
+                <li>Working on <a href="https://joeytan.dev/" target="_blank" rel="noopener noreferrer">Eidetic</a></li>
                 <li>Reading:
                     <ul>
                         <li>
@@ -42,15 +42,15 @@ import Project from "./Project.vue";
         <template #p1>
             <Project>
                 <template #projectName>
-                    <a href="https://joeytan.dev/" target="_blank" rel="noopener noreferrer">AINote</a>
+                    <a href="https://joeytan.dev/" target="_blank" rel="noopener noreferrer">Eidetic</a>
                 </template>
 
                 <template #tooling>
-                    Frictionless notetaking with deep learning.
+                    AI-powered knowledge aggregation.
                 </template>
 
                 <template #description>
-                    Self-organizing notetaking web app designed to make notetaking and organization as simple as possible. Exploring connections between disparate bits of information.
+                    Self-organizing knowledge aggregation engine designed to make exploring ideas as simple as possible. Leverage AI to weave together complex ideas and remember the atomic details.
                 </template>
             </Project>
 
