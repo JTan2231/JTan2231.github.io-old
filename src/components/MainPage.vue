@@ -1,6 +1,7 @@
 <script setup>
 import PageItem from "./PageItem.vue";
 import Project from "./Project.vue";
+import TechEcosystems from "./TechEcosystems.vue";
 </script>
 
 <template>
@@ -11,7 +12,6 @@ import Project from "./Project.vue";
             <a href="mailto:j.tan2231@gmail.com">j.tan2231@gmail.com</a> | 
             <a href="https://linkedin.com/in/joseph-tan-478aa5186">linkedIn</a> |
             <a href="https://github.com/JTan2231">github</a> |
-            <a href="https://jtan2231.github.io">cv</a>
         </template>
         <template #p2>
             Interested in making tomorrow easier.
@@ -73,9 +73,11 @@ import Project from "./Project.vue";
 
     <div style="top: -3rem;">
         <PageItem>
-            <template #heading>Writings</template>
+            <template #heading>Current Thoughts</template>
 
-            <template #p1>In progress.</template>
+            <template #p1>
+                <TechEcosystems />
+            </template>
         </PageItem>
     </div>
 </template>
