@@ -1,0 +1,18 @@
+.bezier {
+    position: relative;
+    width: fit-content;
+}
+
+.bezier::after {
+    content: "";
+    position: absolute;
+    border-bottom: 1px solid black;
+    bottom: 0;
+    transition: 0.5s cubic-bezier(0.65,0.05,0.36,1);
+}
+
+.bezier:hover::after {
+    left: 0;
+    width: 100%;
+    transform: scaleX(0);
+}
