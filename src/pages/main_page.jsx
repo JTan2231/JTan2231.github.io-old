@@ -77,7 +77,7 @@ export class MainMenu extends React.Component {
             height: `fit-content`,
             position: 'fixed',
             left: `calc(50vw - ${w/2}vw)`,
-            top: `calc(50vh - ${h/2}vh)`,
+            top: `calc(10vh)`,
             backgroundColor: 'white',
             border: '1px solid black',
             fontFamily: config.FONT_FAMILY,
@@ -136,6 +136,11 @@ export class MainMenu extends React.Component {
                                 <ul>
                                     <li>Full stack web development</li>
                                     <li>Data science/machine learning</li>
+                                </ul>
+                            </li>
+                            <li>Interested in/willing to learn:
+                                <ul>
+                                    <li>Embedded development</li>
                                     <li>Scientific computing</li>
                                 </ul>
                             </li>
