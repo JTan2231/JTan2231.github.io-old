@@ -18,6 +18,8 @@
 .env.test.local
 .env.production.local
 
+/src/unused
+/public
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
