@@ -5,6 +5,7 @@ import { Playground } from './playground.jsx';
 import { TextHighlight } from '../components/text_highlight.jsx';
 
 import '../stylesheets/main_page.css';
+import '../stylesheets/about.css';
 
 export class MainMenu extends React.Component {
     constructor(props) {
@@ -78,8 +79,6 @@ export class MainMenu extends React.Component {
             position: 'fixed',
             left: `calc(50vw - ${w/2}vw)`,
             top: `calc(10vh)`,
-            backgroundColor: 'white',
-            border: '1px solid black',
             fontFamily: config.FONT_FAMILY,
             fontSize: '20px',
             lineHeight: '1.5em',
@@ -94,12 +93,17 @@ export class MainMenu extends React.Component {
             marginBottom: '0.5em',
         };
 
+        const whatIsThisStyle = Object.assign({}, aboutStyle, {
+            display: this.state.whatIsThis ? '' : 'none',
+            backgroundColor: 'white',
+        });
+
         return (
             <div>
                 { div }
                 <div style={ playgroundStyle }>
                     <Playground />
-                    <div style={ Object.assign({}, aboutStyle, { display: this.state.whatIsThis ? '' : 'none' }) }>
+                    <div style={ whatIsThisStyle }>
                         <div style={ headerStyle }>
                             What is this?
                         </div>
@@ -123,43 +127,48 @@ export class MainMenu extends React.Component {
                     </div>
                 </div>
                 <Portfolio />
-                <div style={ aboutStyle }>
-                    <div style={ headerStyle }>
+                <div style={ aboutStyle } className="about">
+                    <div style={ headerStyle } className="header">
                         Joey Tan
                     </div>
                     <div>
                         Computer science student (May 2023) interested in making tomorrow easier.
                         <br />
-                        Currently:
-                        <ul style={{ margin: '0 0 0.5em 0', }}>
-                            <li>Experienced/comfortable with:
-                                <ul>
-                                    <li>Full stack web development</li>
-                                    <li>Data science/machine learning</li>
-                                </ul>
-                            </li>
-                            <li>Interested in/willing to learn:
-                                <ul>
-                                    <li>Embedded development</li>
-                                    <li>Scientific computing</li>
-                                </ul>
-                            </li>
-                            <li>Working on <a href="https://joeytan.dev/" target="_blank" rel="noreferrer">Eidetic</a></li>
-                            <li>Reading:
-                                <ul>
-                                    <li>
-                                        <a href="https://www.amazon.com/Ancient-Greek-Athletics-Stephen-Miller/dp/0300115296" target="_blank" rel="noreferrer">
-                                            Ancient Greek Athletics
-                                        </a> by Stephen Miller
-                                    </li>
-                                    <li>
-                                        <a href="https://thenetworkstate.com/" target="_blank" rel="noreferrer">The Network State</a> by Balaji Srinivasan
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>Learning how to skate like <a href="https://youtu.be/HI1ZlEdWWJg" target="_blank" rel="noreferrer">this</a></li>
-                        </ul>
-                        Read my <a href="https://drive.google.com/file/d/1WbvTtYuqnQ-GS1HM6Igf9gv8s9o2e6kz/view?usp=sharing" target="_blank" rel="noreferrer">CV</a>, find me on <a href="https://linkedin.com/in/joseph-tan-478aa5186" target="_blank" rel="noreferrer">LinkedIn</a> and <a href="https://github.com/JTan2231/" target="_blank" rel="noreferrer">GitHub</a>, or reach me at <a href="mailto:jtan2231@gmail.com">j.tan2231@gmail.com</a>.
+                        <div className="aboutHint">...</div>
+                        <div className="aboutBody">
+                            Currently:
+                            <ul style={{ margin: '0 0 0.5em 0', }}>
+                                <li>Experienced/comfortable with:
+                                    <ul>
+                                        <li>Full stack web development</li>
+                                        <li>Data science/machine learning</li>
+                                    </ul>
+                                </li>
+                                <li>Interested in/willing to learn:
+                                    <ul>
+                                        <li>Embedded development</li>
+                                        <li>Scientific computing</li>
+                                    </ul>
+                                </li>
+                                <li>Working on <a href="https://joeytan.dev/" target="_blank" rel="noreferrer">Eidetic</a></li>
+                                <li>Reading:
+                                    <ul>
+                                        <li>
+                                            <a href="https://www.amazon.com/Ancient-Greek-Athletics-Stephen-Miller/dp/0300115296" target="_blank" rel="noreferrer">
+                                                Ancient Greek Athletics
+                                            </a> by Stephen Miller
+                                        </li>
+                                        <li>
+                                            <a href="https://thenetworkstate.com/" target="_blank" rel="noreferrer">The Network State</a> by Balaji Srinivasan
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>Learning how to skate like <a href="https://youtu.be/HI1ZlEdWWJg" target="_blank" rel="noreferrer">this</a></li>
+                            </ul>
+                        </div>
+                        <div className="aboutLink">
+                            Read my <a href="https://drive.google.com/file/d/1WbvTtYuqnQ-GS1HM6Igf9gv8s9o2e6kz/view?usp=sharing" target="_blank" rel="noreferrer">CV</a>, find me on <a href="https://linkedin.com/in/joseph-tan-478aa5186" target="_blank" rel="noreferrer">LinkedIn</a> and <a href="https://github.com/JTan2231/" target="_blank" rel="noreferrer">GitHub</a>, or reach me at <a href="mailto:jtan2231@gmail.com">j.tan2231@gmail.com</a>.
+                        </div>
                     </div>
                 </div>
             </div>

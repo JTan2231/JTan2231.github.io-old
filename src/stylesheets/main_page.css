@@ -2,4 +2,27 @@ a {
     text-decoration: none;
     font-weight: bolder;
     color: black;
+    transition: color 0.3s;
+    position: relative;
+}
+
+a:hover {
+    color: blue;
+}
+
+a::before {
+    content: '';
+    position: absolute;
+    width: 0;
+    right: 0;
+    top: 1em;
+    height: 0.1em;
+    transition: width 0.3s;
+    background-color: blue;
+}
+
+a:hover::before {
+    background-color: blue;
+    width: 100%;
+    left: 0;
 }
