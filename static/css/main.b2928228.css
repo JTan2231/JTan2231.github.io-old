@@ -1,2 +1,0 @@
-.loadingScreen,.textWrapper,.textWrapper:focus .loadingScreen{opacity:1}.bezier{position:relative;width:-webkit-fit-content;width:-moz-fit-content;width:fit-content}.bezier:after{border-bottom:1px solid #000;bottom:0;content:"";position:absolute;transition:.5s cubic-bezier(.65,.05,.36,1)}.bezier:hover:after{left:0;-webkit-transform:scaleX(0);transform:scaleX(0);width:100%}a{color:#000;font-weight:bolder;text-decoration:none}
-/*# sourceMappingURL=main.b2928228.css.map*/
