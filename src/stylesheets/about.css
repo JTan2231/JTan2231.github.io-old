@@ -1,0 +1,46 @@
+.about {
+    transition: all 0.5s;
+    outline: 0px solid white;
+    background-color: transparent;
+    border-radius: 2em;
+}
+
+.about a {
+    opacity: 0;
+    transition: all 0.5s;
+}
+
+.aboutLink a {
+    opacity: 1;
+}
+
+.aboutBody {
+    color: transparent;
+    transition: color 0.5s;
+}
+
+.aboutHint {
+    opacity: 1;
+    transition: opacity 0.5s;
+    position: absolute;
+    left: 45%;
+    top: 50%;
+    font-size: 40px;
+    z-index: -1;
+}
+
+.about:hover {
+    background-color: white;
+}
+
+.about:hover .aboutBody {
+    color: black;
+}
+
+.about:hover a {
+    opacity: 1;
+}
+
+.about:hover .aboutHint {
+    opacity: 0;
+}

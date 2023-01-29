@@ -1,0 +1,11 @@
+.loadingScreen {
+    opacity: 1;
+}
+
+.textWrapper {
+    opacity: 1;
+}
+
+.textWrapper:focus .loadingScreen {
+    opacity: 1;
+}
