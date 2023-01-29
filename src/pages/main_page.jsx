@@ -42,20 +42,20 @@ export class MainMenu extends React.Component {
         var div;
         if (this.state.portfolio) {
             div = (
-                <div style={ buttonStyle } onClick={ this.portfolioClick.bind(this) }>
-                    <TextHighlight text="are.na" duration={ 0.3 } />
+                <div style={buttonStyle} onClick={this.portfolioClick.bind(this)}>
+                    <TextHighlight text="are.na" duration={0.3} />
                 </div>
             );
         }
         else {
             div = (
-                <div style={ buttonStyle }>
-                    <span onClick={ this.portfolioClick.bind(this) }>
-                        <TextHighlight text="portfolio" duration={ 0.3 } />
+                <div style={buttonStyle}>
+                    <span onClick={this.portfolioClick.bind(this)}>
+                        <TextHighlight text="portfolio" duration={0.3} />
                     </span>
                     <br />
-                    <span onClick={ this.whatIsThisClick.bind(this) }>
-                        <TextHighlight text="what is this?" duration={ 0.3 } />
+                    <span onClick={this.whatIsThisClick.bind(this)}>
+                        <TextHighlight text="what is this?" duration={0.3} />
                     </span>
                 </div>
             );
@@ -77,7 +77,7 @@ export class MainMenu extends React.Component {
             width: `${w}vw`,
             height: `fit-content`,
             position: 'fixed',
-            left: `calc(50vw - ${w/2}vw)`,
+            left: `calc(50vw - ${w / 2}vw)`,
             top: `calc(10vh)`,
             fontFamily: config.FONT_FAMILY,
             fontSize: '20px',
@@ -100,11 +100,11 @@ export class MainMenu extends React.Component {
 
         return (
             <div>
-                { div }
-                <div style={ playgroundStyle }>
+                {div}
+                <div style={playgroundStyle}>
                     <Playground />
-                    <div style={ whatIsThisStyle }>
-                        <div style={ headerStyle }>
+                    <div style={whatIsThisStyle}>
+                        <div style={headerStyle}>
                             What is this?
                         </div>
                         A collection of <a href="https://www.are.na/" target="_blank" rel="noreferrer">Are.na</a> blocks clustered by the contextual similarity of their contents using machine learning.
@@ -121,14 +121,14 @@ export class MainMenu extends React.Component {
                             </li>
                         </ul>
 
-                        <div style={{ cursor: 'pointer', fontWeight: 'bolder', }} onClick={ this.whatIsThisClick.bind(this) }>
+                        <div style={{ cursor: 'pointer', fontWeight: 'bolder', }} onClick={this.whatIsThisClick.bind(this)}>
                             Close
                         </div>
                     </div>
                 </div>
                 <Portfolio />
-                <div style={ aboutStyle } className="about">
-                    <div style={ headerStyle } className="header">
+                <div style={aboutStyle} className="about">
+                    <div style={headerStyle} className="header">
                         Joey Tan
                     </div>
                     <div>
@@ -140,30 +140,46 @@ export class MainMenu extends React.Component {
                             <ul style={{ margin: '0 0 0.5em 0', }}>
                                 <li>Experienced/comfortable with:
                                     <ul>
-                                        <li>Full stack web development</li>
-                                        <li>Data science/machine learning</li>
+                                        <li>Full stack web dev - JavaScript, Python, Golang</li>
+                                        <li>Data science/machine learning - Python + TensorFlow/PyTorch</li>
                                     </ul>
                                 </li>
-                                <li>Interested in/willing to learn:
+                                <li>Working on:
                                     <ul>
-                                        <li>Embedded development</li>
-                                        <li>Scientific computing</li>
+                                        <li>
+                                            <a href="https://github.com/jtan2231/eidetic-frontend/" target="_blank" rel="noreferrer">
+                                                Eidetic
+                                            </a>
+                                            &nbsp;- AI-automated note organization and exploration
+                                        </li>
+                                        <li>
+                                            <a href="https://github.com/jtan2231/treehouse/" target="_blank" rel="noreferrer">
+                                                Treehouse
+                                            </a>
+                                            &nbsp;- Lightweight free blogging platform
+                                        </li>
+                                        <li>
+                                            <a href="https://github.com/consciencedotai/conscience/" target="_blank" rel="noreferrer">
+                                                Conscience
+                                            </a>
+                                            &nbsp;- AI scheduling secretary assistant
+                                        </li>
                                     </ul>
                                 </li>
-                                <li>Working on <a href="https://joeytan.dev/" target="_blank" rel="noreferrer">Eidetic</a></li>
                                 <li>Reading:
                                     <ul>
                                         <li>
-                                            <a href="https://www.amazon.com/Ancient-Greek-Athletics-Stephen-Miller/dp/0300115296" target="_blank" rel="noreferrer">
-                                                Ancient Greek Athletics
-                                            </a> by Stephen Miller
+                                            <a href="https://www.amazon.com/Zero-One-Notes-Startups-Future/dp/0804139296" target="_blank" rel="noreferrer">
+                                                Zero to One
+                                            </a> by Peter Thiel
                                         </li>
                                         <li>
-                                            <a href="https://thenetworkstate.com/" target="_blank" rel="noreferrer">The Network State</a> by Balaji Srinivasan
+                                            <a href="https://www.amazon.com/Silk-Roads-New-History-World/dp/1101912375" target="_blank" rel="noreferrer">
+                                                The Silk Roads
+                                            </a> by Peter Frankopan
                                         </li>
                                     </ul>
                                 </li>
-                                <li>Learning how to skate like <a href="https://youtu.be/HI1ZlEdWWJg" target="_blank" rel="noreferrer">this</a></li>
                             </ul>
                         </div>
                         <div className="aboutLink">

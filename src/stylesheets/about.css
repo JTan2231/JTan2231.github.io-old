@@ -3,6 +3,7 @@
     outline: 0px solid white;
     background-color: transparent;
     border-radius: 2em;
+    user-select: none;
 }
 
 .about a {
