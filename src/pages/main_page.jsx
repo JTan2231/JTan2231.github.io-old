@@ -111,19 +111,19 @@ export class MainMenu extends React.Component {
                             Currently working on:
                             <ul style={{ margin: '0 0 0.5em 0', }}>
                                 <li>
-                                    <a href="https://github.com/jtan2231/eidetic-frontend/" target="_blank" rel="noreferrer">
+                                    <a href="https://github.com/jtan2231/eidetic-desktop/" target="_blank" rel="noreferrer">
                                         Eidetic
                                     </a>
                                     &nbsp;- Note-taking with LLM embedding lookup
                                 </li>
                                 <li>
-                                    <a href="https://github.com/jtan2231/treehouse/" target="_blank" rel="noreferrer">
+                                    <a href="https://github.com/jtan2231/hivemind/" target="_blank" rel="noreferrer">
                                         Hivemind
                                     </a>
                                     &nbsp;- (looking for names) Distributed LLM inference for low resource networks
                                 </li>
                                 <li>
-                                    <a href="https://github.com/consciencedotai/conscience/" target="_blank" rel="noreferrer">
+                                    <a href="https://leetcode.com/JTan2231/" target="_blank" rel="noreferrer">
                                         LeetCode
                                     </a>
                                     &nbsp;- Algorithmic proficiency
