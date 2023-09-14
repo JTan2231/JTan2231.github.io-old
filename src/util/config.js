@@ -1,6 +1,6 @@
 export const RADIUS_DEFAULT = 50;
 export const CURSOR_RADIUS = 15;
-export const INTERVAL = 1000/60; // 60 fps
+export const INTERVAL = 1000/360; // 360 fps
 export const CIRCLE_COUNT = 7;
 export const DEFAULT_TOLERANCE = 0.001;
 export const TRANSITION_DELAY_SECONDS = 0.8; // NOTE: this is for half the screen to be covered

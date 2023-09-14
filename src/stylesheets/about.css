@@ -1,13 +1,17 @@
+html * {
+    font-family: monospace;
+}
+
 .about {
-    transition: all 0.5s;
+    opacity: 1;
     outline: 0px solid white;
-    background-color: transparent;
+    background-color: white;
     border-radius: 2em;
     user-select: none;
 }
 
 .about a {
-    opacity: 0;
+    opacity: 1;
     transition: all 0.5s;
 }
 
@@ -16,7 +20,7 @@
 }
 
 .aboutBody {
-    color: transparent;
+    color: black;
     transition: color 0.5s;
 }
 
@@ -43,5 +47,5 @@
 }
 
 .about:hover .aboutHint {
-    opacity: 0;
+    opacity: 1;
 }
