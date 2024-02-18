@@ -1,7 +1,6 @@
 import React from 'react';
 import * as config from '../util/config.js';
 import { Portfolio } from './portfolio.jsx';
-import { TextHighlight } from '../components/text_highlight.jsx';
 
 import '../stylesheets/main_page.css';
 import '../stylesheets/about.css';
@@ -28,50 +27,7 @@ export class MainMenu extends React.Component {
     }
 
     render() {
-        const buttonStyle = {
-            position: 'fixed',
-            left: '5px',
-            top: '5px',
-            zIndex: 100,
-            cursor: 'default',
-            fontFamily: config.FONT_FAMILY,
-            fontSize: '10px'
-        };
-
-        var div;
-        if (this.state.portfolio) {
-            div = (
-                <div style={buttonStyle} onClick={this.portfolioClick.bind(this)}>
-                    <TextHighlight text="are.na" duration={0.3} />
-                </div>
-            );
-        }
-        else {
-            div = (
-                <div style={buttonStyle}>
-                    <span onClick={this.portfolioClick.bind(this)}>
-                        <TextHighlight text="portfolio" duration={0.3} />
-                    </span>
-                    <br />
-                    <span onClick={this.whatIsThisClick.bind(this)}>
-                        <TextHighlight text="what is this?" duration={0.3} />
-                    </span>
-                </div>
-            );
-        }
-
-        const playgroundStyle = {
-            position: 'absolute',
-            overflow: 'scroll',
-            top: '30px',
-            zIndex: 4,
-            width: 'calc(100vw - 10em)',
-            margin: '0 5em',
-            display: this.state.portfolio ? 'none' : '',
-        }
-
         const w = 40;
-        const h = 50;
         const aboutStyle = {
             width: `${w}vw`,
             height: `fit-content`,
@@ -92,20 +48,15 @@ export class MainMenu extends React.Component {
             marginBottom: '0.5em',
         };
 
-        const whatIsThisStyle = Object.assign({}, aboutStyle, {
-            display: this.state.whatIsThis ? '' : 'none',
-            backgroundColor: 'white',
-        });
-
         return (
             <div>
-                <Portfolio />
                 <div style={aboutStyle} className="about">
                     <div style={headerStyle} className="header">
                         Joey Tan
                     </div>
                     <div>
-                        Software developer. I like building things.
+                        <span>Software developer.</span><br />I like wringing the simplicity out of complexity.
+                        <br />
                         <br />
                         <div className="aboutBody">
                             Currently working on:
@@ -130,6 +81,7 @@ export class MainMenu extends React.Component {
                                 </div>
                             </div>
                         </div>
+                        <br />
                         <div className="aboutLink">
                             <a href="https://linkedin.com/in/joseph-tan-478aa5186" target="_blank" rel="noreferrer">LinkedIn</a>&nbsp;<a href="https://github.com/JTan2231/" target="_blank" rel="noreferrer">GitHub</a>&nbsp;<a href="https://www.are.na/joey-tan" target="_blank" rel="noreferrer">Are.na</a>
                         </div>

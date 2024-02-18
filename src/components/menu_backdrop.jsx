@@ -13,8 +13,8 @@ function elasticCollision2D(x1, x2, v1, v2, m1, m2) {
 
     var dxMag = dx.magnitude();
 
-    var total = vec2d.vecDot2D(dv, dx) / (dxMag*dxMag);
-    total *= (2*m2 / (m1+m2));
+    var total = vec2d.vecDot2D(dv, dx) / (dxMag * dxMag);
+    total *= (2 * m2 / (m1 + m2));
 
     total = vec2d.scalarMultVec2D(total, dx);
     total = vec2d.subVec2D(v1, total);
@@ -25,7 +25,7 @@ function elasticCollision2D(x1, x2, v1, v2, m1, m2) {
 }
 
 class Circle {
-    constructor(position, radius=config.RADIUS_DEFAULT) {
+    constructor(position, radius = config.RADIUS_DEFAULT) {
         this.radius = radius;
         this.mass = radius;
         this.position = new vec2d.Vector2D(position);
@@ -35,7 +35,7 @@ class Circle {
     // Check for a collision with a circle c
     // Perfectly elastic collisions are assumed
     checkCollision(c) {
-        if (vec2d.eucDistance(this.position, c.position) < this.radius+c.radius)
+        if (vec2d.eucDistance(this.position, c.position) < this.radius + c.radius)
             return true;
 
         return false;
@@ -122,7 +122,7 @@ class PhysicsMenu extends React.Component {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.rendering !== this.state.rendering) {
-            if (prevProps.rendering === false) { 
+            if (prevProps.rendering === false) {
                 const canvas = this.circleCanvas.current;
                 const context = canvas.getContext('2d');
                 context.clearRect(0, 0, this.width, this.height);
@@ -137,8 +137,8 @@ class PhysicsMenu extends React.Component {
         var velocities = [];
         for (var i = 0; i < this.circles.length; i++) {
             positions.push(vec2d.addVec2D(this.circles[i].position, this.circles[i].velocity));
-            var g = new vec2d.Vector2D([mathUtils.randomSign()*Math.random(), mathUtils.randomSign()*Math.random()]);
-            g = vec2d.scalarMultVec2D(this.forceScalar/this.circles[i].mass, g);
+            var g = new vec2d.Vector2D([mathUtils.randomSign() * Math.random(), mathUtils.randomSign() * Math.random()]);
+            g = vec2d.scalarMultVec2D(this.forceScalar / this.circles[i].mass, g);
             velocities.push(vec2d.addVec2D(this.circles[i].velocity, g));
         }
 
@@ -157,21 +157,21 @@ class PhysicsMenu extends React.Component {
     checkCollisionBoundary(state, radius) {
         var position = state[0], velocity = state[1];
         const scalingFactor = 0.5;
-        if (position.x > this.canvasWidth-radius) {
-            velocity.x = mathUtils.threshold(-scalingFactor*(velocity.x));
-            position.x = this.canvasWidth-radius;
+        if (position.x > this.canvasWidth - radius) {
+            velocity.x = mathUtils.threshold(-scalingFactor * (velocity.x));
+            position.x = this.canvasWidth - radius;
         }
         else if (position.x < radius) {
-            velocity.x = mathUtils.threshold(scalingFactor*(velocity.x));
+            velocity.x = mathUtils.threshold(scalingFactor * (velocity.x));
             position.x = radius;
         }
 
-        if (position.y > this.height-radius) {
-            velocity.y = mathUtils.threshold(-scalingFactor*(velocity.y));
-            position.y = this.height-radius;
+        if (position.y > this.height - radius) {
+            velocity.y = mathUtils.threshold(-scalingFactor * (velocity.y));
+            position.y = this.height - radius;
         }
         else if (position.y < radius) {
-            velocity.y = mathUtils.threshold(-scalingFactor*(velocity.y));
+            velocity.y = mathUtils.threshold(-scalingFactor * (velocity.y));
             position.y = radius;
         }
 
@@ -185,6 +185,15 @@ class PhysicsMenu extends React.Component {
         return false;
     }
 
+    checkModalCollision(x1, threshold) {
+        const [rxtl, rytl] = [window.innerWidth / 2 - this.props.modal.x / 2, window.innerHeight / 2 - this.props.modal.y / 2];
+        const [rxbr, rybr] = [window.innerWidth / 2 + this.props.modal.x / 2, window.innerHeight / 2 + this.props.modal.y / 2];
+
+        const [c1x, c1y] = [Math.max(rxtl, Math.min(x1.x, rxbr)), Math.max(rytl, Math.min(x1.y, rybr))];
+
+        return Math.sqrt(Math.pow(c1x - x1.x, 2) + Math.pow(c1y - x1.y, 2)) <= threshold;
+    }
+
     checkCollisions(states) {
         var scalingFactor = 0.8;
 
@@ -196,7 +205,7 @@ class PhysicsMenu extends React.Component {
                     if (i !== j) {
                         var r1 = this.circles[i].radius, r2 = this.circles[j].radius;
                         if (this.checkCollision(positions[i], positions[j],
-                                                r1+r2)) {
+                            r1 + r2)) {
                             var x1 = positions[i], x2 = positions[j];
                             var v1 = velocities[i], v2 = velocities[j];
                             var m1 = this.circles[i].mass, m2 = this.circles[j].mass;
@@ -208,12 +217,16 @@ class PhysicsMenu extends React.Component {
                             velocities[j] = vec2d.scalarMultVec2D(scalingFactor, newV2);
 
                             var p = forceOut(positions[i], positions[j],
-                                             r1, r2);
+                                r1, r2);
 
                             positions[i] = p[0];
                             positions[j] = p[1];
                         }
                     }
+                }
+
+                if (this.checkModalCollision(positions[i], this.circles[i].radius)) {
+                    velocities[i] = new vec2d.Vector2D([-velocities[i].x, -velocities[i].y]);
                 }
             }
             this.checkCollisionBoundary([positions[i], velocities[i]], this.circles[i].radius);
@@ -232,15 +245,15 @@ class PhysicsMenu extends React.Component {
         this.mouse.y = -1000;
     }
 
-    drawCircle(context, circle, color='black') {
+    drawCircle(context, circle, color = 'black') {
         var circleRadius = circle.radius;
-        if (circleRadius > 0.25*this.canvasWidth) {
+        if (circleRadius > 0.25 * this.canvasWidth) {
             circleRadius = Math.round(circleRadius / 4);
-            circleRadius = Math.max(circleRadius, config.RADIUS_DEFAULT/10);
+            circleRadius = Math.max(circleRadius, config.RADIUS_DEFAULT / 10);
         }
 
         context.beginPath();
-        context.arc(circle.position.x, circle.position.y, circleRadius, 0, 2*Math.PI, false);
+        context.arc(circle.position.x, circle.position.y, circleRadius, 0, 2 * Math.PI, false);
         context.fillStyle = color;
         context.strokeStyle = color;
         context.fill();
@@ -250,14 +263,14 @@ class PhysicsMenu extends React.Component {
     getTextUrl(idx) {
         if (this.state.rendering) {
             switch (idx) {
-              case 1:
-                return "https://en.wikipedia.org/wiki/The_Hobbit";
-              case 0:
-                return "https://en.wikipedia.org/wiki/Ulysses_(novel)";
-              case 2:
-                return "https://en.wikipedia.org/wiki/Finnegans_Wake";
-              default:
-                return "https://www.github.com/JTan2231/";
+                case 1:
+                    return "https://en.wikipedia.org/wiki/The_Hobbit";
+                case 0:
+                    return "https://en.wikipedia.org/wiki/Ulysses_(novel)";
+                case 2:
+                    return "https://en.wikipedia.org/wiki/Finnegans_Wake";
+                default:
+                    return "https://www.github.com/JTan2231/";
             }
         }
         else {
@@ -269,7 +282,7 @@ class PhysicsMenu extends React.Component {
         var background = this.backgroundCanvas.current;
         var ctx = background.getContext('2d');
         ctx.fillStyle = config.BACKGROUND_COLOR;
-        ctx.fillRect(0, 0, this.width*config.TEXT_RATIO, this.height);
+        ctx.fillRect(0, 0, this.width * config.TEXT_RATIO, this.height);
     }
 
     tick() {
@@ -289,9 +302,9 @@ class PhysicsMenu extends React.Component {
 
             while (this.state.count < config.CIRCLE_COUNT) {
                 this.circles.push(new Circle([mathUtils.randomInt(this.width), mathUtils.randomInt(this.height)],
-                                              Math.max(config.RADIUS_DEFAULT/2, mathUtils.randomInt(config.RADIUS_DEFAULT*2))));
+                    Math.max(config.RADIUS_DEFAULT / 2, mathUtils.randomInt(config.RADIUS_DEFAULT * 2))));
 
-                this.setState({ count: this.state.count+1 });
+                this.setState({ count: this.state.count + 1 });
             }
 
             context.beginPath();
@@ -312,9 +325,9 @@ class PhysicsMenu extends React.Component {
         const pageStyle = {
             'userSelect': 'none',
             'height': this.height,
-            'width': 100*this.tr+'%',
+            'width': 100 * this.tr + '%',
             'top': '0',
-            'left': 100*(1-this.tr)+'%',
+            'left': 100 * (1 - this.tr) + '%',
             'position': 'fixed'
         }
 
@@ -335,10 +348,10 @@ class PhysicsMenu extends React.Component {
 
         return (
             <div>
-                <div style={ pageStyle }>
-                    <div style={ textStyle }>{ text }</div>
-                    <canvas style={ styles.backgroundStyle } ref={ this.backgroundCanvas } width={ this.canvasWidth } height={ this.height }/>
-                    <canvas style={ styles.circlesStyle } ref={ this.circleCanvas } width={ this.canvasWidth } height={ this.height }/>
+                <div style={pageStyle}>
+                    <div style={textStyle}>{text}</div>
+                    <canvas style={styles.backgroundStyle} ref={this.backgroundCanvas} width={this.canvasWidth} height={this.height} />
+                    <canvas style={styles.circlesStyle} ref={this.circleCanvas} width={this.canvasWidth} height={this.height} />
                 </div>
             </div>
         );
