@@ -2,27 +2,19 @@ a {
     text-decoration: none;
     font-weight: bolder;
     color: black;
-    transition: color 0.3s;
+    transition: color 0.15s;
     position: relative;
 }
 
 a:hover {
-    color: blue;
+    color: #aaa;
 }
 
-a::before {
-    content: '';
-    position: absolute;
-    width: 0;
-    right: 0;
-    top: 1em;
-    height: 0.1em;
-    transition: width 0.3s;
-    background-color: blue;
+@font-face {
+    font-family: 'mononoki-Regular';
+    src: url('../assets/fonts/mononoki-Regular.woff2') format('woff2');
 }
 
-a:hover::before {
-    background-color: blue;
-    width: 100%;
-    left: 0;
+body {
+    font-family: 'mononoki-Regular', monospace;
 }

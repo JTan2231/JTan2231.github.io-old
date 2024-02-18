@@ -109,29 +109,29 @@ export class MainMenu extends React.Component {
                         <br />
                         <div className="aboutBody">
                             Currently working on:
-                            <ul style={{ margin: '0 0 0.5em 0', }}>
-                                <li>
-                                    <a href="https://youtu.be/KCSEwfqs-VM" target="_blank" rel="noreferrer">
-                                        Chopin's Polonaise in A-flat major, Op. 53
+                            <div style={{ margin: '0 0 0.5em 0', }}>
+                                <div>
+                                    <a href="https://youtu.be/enJ6be4qLMs" target="_blank" rel="noreferrer">
+                                        Scherzo No. 2
                                     </a>
-                                    &nbsp;- My favorite Chopin piece
-                                </li>
-                                <li>
-                                    <a href="https://github.com/jtan2231/hivemind/" target="_blank" rel="noreferrer">
+                                    &nbsp;- Learning my favorite Chopin piece
+                                </div>
+                                <div>
+                                    <a href="https://github.com/jtan2231/hivemind" target="_blank" rel="noreferrer">
                                         Hive
                                     </a>
                                     &nbsp;- Tensor processing language and autodiff exploration
-                                </li>
-                                <li>
-                                    <a href="https://leetcode.com/JTan2231/" target="_blank" rel="noreferrer">
-                                        LeetCode
+                                </div>
+                                <div>
+                                    <a href="https://github.com/JTan2231/eidetic" target="_blank" rel="noreferrer">
+                                        Eidetic
                                     </a>
-                                    &nbsp;- Algorithmic proficiency
-                                </li>
-                            </ul>
+                                    &nbsp;- Looking for a better interface between GPT and ideas
+                                </div>
+                            </div>
                         </div>
                         <div className="aboutLink">
-                            Find me on <a href="https://linkedin.com/in/joseph-tan-478aa5186" target="_blank" rel="noreferrer">LinkedIn</a>, <a href="https://github.com/JTan2231/" target="_blank" rel="noreferrer">GitHub</a>, <a href="https://www.are.na/joey-tan" target="_blank" rel="noreferrer">are.na</a>, or email me at <a href="mailto:jtan2231@gmail.com">j.tan2231@gmail.com</a>.
+                            <a href="https://linkedin.com/in/joseph-tan-478aa5186" target="_blank" rel="noreferrer">LinkedIn</a>&nbsp;<a href="https://github.com/JTan2231/" target="_blank" rel="noreferrer">GitHub</a>&nbsp;<a href="https://www.are.na/joey-tan" target="_blank" rel="noreferrer">Are.na</a>
                         </div>
                     </div>
                 </div>
