@@ -1,13 +1,14 @@
 {
   "files": {
-    "main.css": "/static/css/main.764071ec.css",
-    "main.js": "/static/js/main.ba0e393a.js",
+    "main.css": "/static/css/main.95933b2f.css",
+    "main.js": "/static/js/main.b3d6319d.js",
+    "static/media/mononoki-Regular.woff2": "/static/media/mononoki-Regular.f86e43f9e4816aa2abec.woff2",
     "index.html": "/index.html",
-    "main.764071ec.css.map": "/static/css/main.764071ec.css.map",
-    "main.ba0e393a.js.map": "/static/js/main.ba0e393a.js.map"
+    "main.95933b2f.css.map": "/static/css/main.95933b2f.css.map",
+    "main.b3d6319d.js.map": "/static/js/main.b3d6319d.js.map"
   },
   "entrypoints": [
-    "static/css/main.764071ec.css",
-    "static/js/main.ba0e393a.js"
+    "static/css/main.95933b2f.css",
+    "static/js/main.b3d6319d.js"
   ]
 }
